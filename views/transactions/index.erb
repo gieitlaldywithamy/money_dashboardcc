@@ -1,3 +1,4 @@
+
 <h1>Transactions</h1>
 <%= Transaction.total_spent() %>
 <table>
@@ -15,7 +16,7 @@
     <td>|</td>
     <td><%= transaction.tag_id %></td>
     <td>|</td>
-    <td><%= transaction.merchant_id %></td>
+    <td><%= transaction.merchant %></td>
   </tr>
   <% end %>
 </table>

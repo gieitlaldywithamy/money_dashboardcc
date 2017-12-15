@@ -1,4 +1,6 @@
 require('./db/sql_runner')
+require('pry-byebug')
+require_relative('merchant.rb')
 
 class Transaction
 
@@ -15,6 +17,17 @@ class Transaction
     values = [@value, @merchant_id, @tag_id]
     transaction = SqlRunner.run(sql, values)
     @id = transaction[0]['id'].to_i()
+  end
+
+  def merchant()
+    merchant = Merchant.find(@merchant_id)
+    binding.pry
+    nil
+  end
+
+  def Transaction.delete_all()
+    sql = "DELETE FROM transactions;"
+    SqlRunner.run(sql)
   end
 
   def Transaction.all()

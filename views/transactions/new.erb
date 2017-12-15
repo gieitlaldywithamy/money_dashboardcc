@@ -3,7 +3,7 @@
  <input type="text" name="value" value="" id="value_input">
  <br>
 
- <label for="house_select">Merchant</label>
+ <label for="merchant_select">Merchant</label>
  <select class="" name="merchant_id" id="merchant_select">
    <% @merchants.each do |merchant| %>
   <option value="<%= merchant.id %>"><%= merchant.name %></option>

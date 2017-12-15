@@ -21,6 +21,11 @@ class Merchant
       SqlRunner.run(sql)
   end
 
+  def Merchant.find(id)
+    sql = "SELECT * FROM merchants WHERE id = $1"
+
+    return SqlRunner.run_sql_and_map(sql, Merchant, [@id])[0]
+  end
   private
 
   def Merchant.all()
