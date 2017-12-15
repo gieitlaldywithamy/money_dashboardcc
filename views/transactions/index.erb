@@ -16,7 +16,9 @@
     <td>|</td>
     <td><%= transaction.tag_id %></td>
     <td>|</td>
-    <td><%= transaction.merchant %></td>
+    <td><%= transaction.merchant.name %></td>
   </tr>
   <% end %>
+
 </table>
+  <p>Transaction by tag: <%= Transaction.total_spent_by_tag(@tag) %> </p>

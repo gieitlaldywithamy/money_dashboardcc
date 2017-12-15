@@ -1,6 +1,7 @@
 require('./db/sql_runner')
 require('pry-byebug')
-require_relative('merchant.rb')
+require_relative('./merchant.rb')
+require_relative('./tag.rb')
 
 class Transaction
 
@@ -21,8 +22,7 @@ class Transaction
 
   def merchant()
     merchant = Merchant.find(@merchant_id)
-    binding.pry
-    nil
+
   end
 
   def Transaction.delete_all()
@@ -41,6 +41,12 @@ class Transaction
     return total_spent
   end
 
+  def Transaction.total_spent_by_tag(tag)
+    sql = "SELECT SUM(value) FROM transactions WHERE tag_id = $1"
+    values = [tag.id]
+    total_spent = SqlRunner.run(sql, values)[0].values().first()
+    return total_spent
+  end
 
 
 

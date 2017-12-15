@@ -11,6 +11,7 @@ require_relative('../models/merchant.rb')
 
 get('/transactions') do
   @transactions = Transaction.all()
+  @tag = Tag.all()[1]
   erb(:'transactions/index')
 end
 
