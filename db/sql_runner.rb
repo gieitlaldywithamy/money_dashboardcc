@@ -15,6 +15,6 @@ class SqlRunner
  end
 
  def SqlRunner.run_sql_and_map(sql, classname, values = [])
-   return SqlRunner.map_object(SqlRunner.sql_run(sql, values), classname)
+   return SqlRunner.map_object(SqlRunner.run(sql, values), classname)
  end
 end

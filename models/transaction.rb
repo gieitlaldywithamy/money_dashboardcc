@@ -2,6 +2,7 @@ require('./db/sql_runner')
 
 class Transaction
 
+  attr_reader :value, :merchant_id, :tag_id
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @value = options['value']
@@ -14,6 +15,11 @@ class Transaction
     values = [@value, @merchant_id, @tag_id]
     transaction = SqlRunner.run(sql, values)
     @id = transaction[0]['id'].to_i()
+  end
+
+  def Transaction.all()
+    sql = "SELECT * FROM transactions;"
+    return SqlRunner.run_sql_and_map(sql, Transaction)
   end
 
 
