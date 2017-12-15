@@ -12,6 +12,7 @@
   </tr>
   <% for transaction in @transactions %>
   <tr>
+    <td><%= transaction.name %></a></td>
     <td><%= transaction.value %></a></td>
     <td>|</td>
     <td><%= transaction.tag_id %></td>
@@ -21,4 +22,5 @@
   <% end %>
 
 </table>
+<!--  broken -->
   <p>Transaction by tag: <%= Transaction.total_spent_by_tag(@tag) %> </p>

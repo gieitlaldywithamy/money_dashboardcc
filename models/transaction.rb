@@ -5,17 +5,18 @@ require_relative('./tag.rb')
 
 class Transaction
 
-  attr_reader :value, :merchant_id, :tag_id
+  attr_reader :name, :value, :merchant_id, :tag_id
   def initialize(options)
     @id = options['id'].to_i if options['id']
+    @name = options['name']
     @value = options['value']
     @merchant_id = options['merchant_id'].to_i()
     @tag_id = options['tag_id'].to_i()
   end
 
   def save()
-    sql = "INSERT INTO transactions (value, merchant_id, tag_id) VALUES ($1, $2, $3) RETURNING id;"
-    values = [@value, @merchant_id, @tag_id]
+    sql = "INSERT INTO transactions (name, value, merchant_id, tag_id) VALUES ($1, $2, $3, $4) RETURNING id;"
+    values = [@name, @value, @merchant_id, @tag_id]
     transaction = SqlRunner.run(sql, values)
     @id = transaction[0]['id'].to_i()
   end
@@ -44,8 +45,13 @@ class Transaction
   def Transaction.total_spent_by_tag(tag)
     sql = "SELECT SUM(value) FROM transactions WHERE tag_id = $1"
     values = [tag.id]
-    total_spent = SqlRunner.run(sql, values)[0].values().first()
-    return total_spent
+
+    total_spent = SqlRunner.run(sql, values)[0]['sum']
+    if total_spent
+      return total_spent
+    else
+      return "0"
+    end
   end
 
 

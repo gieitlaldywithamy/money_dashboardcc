@@ -1,0 +1,17 @@
+
+<h1>Tags</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+
+
+  </tr>
+  <% for tag in @tags %>
+  <tr>
+    <td><%= tag.name %></a></td>
+
+    <td><%= Transaction.total_spent_by_tag(tag) %></td>
+
+  </tr>
+  <% end %>
