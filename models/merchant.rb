@@ -2,8 +2,8 @@ require('./db/sql_runner')
 
 class Merchant
 
-  attr_reader :id
-  
+  attr_reader :id, :name
+
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
@@ -21,9 +21,11 @@ class Merchant
       SqlRunner.run(sql)
   end
 
-  def self.all()
+  private
+
+  def Merchant.all()
       sql = "SELECT * FROM merchants;"
-      merchants = SqlRunner.run_sql_and_map(sql, 'Merchant')
+      merchants = SqlRunner.run_sql_and_map(sql, Merchant)
   end
 
 end

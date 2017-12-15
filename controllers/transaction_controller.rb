@@ -8,7 +8,19 @@ require_relative('../models/transaction.rb')
 require_relative('../models/tag.rb')
 require_relative('../models/merchant.rb')
 
-get('/transaction') do
+get('/transactions') do
   @transactions = Transaction.all()
   erb(:'transactions/index')
+end
+
+post('/transactions') do
+  transaction = Transaction.new(params)
+  transaction.save()
+  redirect to ('/transactions')
+end
+
+get('/transactions/new') do
+  @merchants = Merchant.all()
+  @tags = Tag.all()
+  erb(:'transactions/new')
 end

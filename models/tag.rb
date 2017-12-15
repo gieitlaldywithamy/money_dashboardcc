@@ -2,8 +2,8 @@ require('./db/sql_runner')
 
 class Tag
 
-  attr_reader :id
-  
+  attr_reader :id, :name
+
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
@@ -21,9 +21,9 @@ class Tag
       SqlRunner.run(sql)
   end
 
-  def self.all()
+  def Tag.all()
       sql = "SELECT * FROM tags;"
-      merchants = SqlRunner.run_sql_and_map(sql, 'Tag')
+      merchants = SqlRunner.run_sql_and_map(sql, Tag)
   end
 
 end

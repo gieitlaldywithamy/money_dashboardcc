@@ -22,5 +22,14 @@ class Transaction
     return SqlRunner.run_sql_and_map(sql, Transaction)
   end
 
+  def Transaction.total_spent()
+    sql = "SELECT SUM(value) FROM transactions;"
+    total_spent = SqlRunner.run(sql)[0].values().first()
+    return total_spent
+  end
+
+
+
+
 
 end

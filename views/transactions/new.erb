@@ -1,0 +1,20 @@
+<form class="" action="/transactions" method="post">
+ <label for="value_input">How much?</label>
+ <input type="text" name="value" value="" id="value_input">
+ <br>
+
+ <label for="house_select">Merchant</label>
+ <select class="" name="merchant_id" id="merchant_select">
+   <% @merchants.each do |merchant| %>
+  <option value="<%= merchant.id %>"><%= merchant.name %></option>
+  <% end %>
+ </select>
+
+ <select class="" name="tag_id" id="tag_select">
+   <% @tags.each do |tag| %>
+  <option value="<%= tag.id %>"><%= tag.name %></option>
+  <% end %>
+ </select>
+ <br>
+  <input type="submit" name="" value="Save">
+</form>
