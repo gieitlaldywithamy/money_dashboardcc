@@ -5,6 +5,8 @@
   <tr>
     <th>How Much?</th>
     <th></th>
+    <th>When></th>
+    <th></th>
     <th>Tag</th>
     <th></th>
     <th>Merchant</th>
@@ -14,8 +16,8 @@
   <tr>
     <td><%= transaction.name %></a></td>
     <td><%= transaction.value %></a></td>
-    <td>|</td>
-    <td><%= transaction.tag_id %></td>
+    <td><%= transaction.transaction_date %></a></td>
+    <td><%= transaction.tag.name %></td>
     <td>|</td>
     <td><%= transaction.merchant.name %></td>
   </tr>
@@ -23,4 +25,3 @@
 
 </table>
 <!--  broken -->
-  <p>Transaction by tag: <%= Transaction.total_spent_by_tag(@tag) %> </p>

@@ -13,3 +13,14 @@ get('/tags') do
   @tags = Tag.all()
   erb(:'tags/index')
 end
+
+post('/tags') do
+  merchant = Tag.new(params)
+  merchant.save()
+  redirect to ('/tags')
+end
+
+get('/tags/new') do
+  @tags = Tag.all()
+  erb(:'tags/new')
+end

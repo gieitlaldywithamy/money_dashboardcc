@@ -1,45 +1,105 @@
 require_relative('../models/merchant')
 require_relative('../models/tag')
 require_relative('../models/transaction')
+require_relative('../models/account_settings')
 
 
 Transaction.delete_all()
 Merchant.delete_all()
 Tag.delete_all()
-# Merchants
-tesco = Merchant.new({'name' => 'Tesco'})
-margiotta = Merchant.new({'name' => 'Margiotta'})
-amazon = Merchant.new({'name' => 'Amazon'})
-spoons = Merchant.new({'name' => 'Wetherspoons'})
+AccountSettings.delete_all()
 
-tesco.save()
-margiotta.save()
-amazon.save()
-spoons.save()
+account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 1800)
+account_settings.save()
 
 # Tags
-fags = Tag.new({'name' => 'fags'})
-rent = Tag.new({'name' => 'rent'})
-ct = Tag.new({'name' => 'council tax'})
-meals_out = Tag.new({'name' => 'eating out'})
-home_food = Tag.new({'name' => 'food shopping'})
-nights_out = Tag.new({'name' => 'nights out'})
-shopping = Tag.new({'name' => 'shopping'})
+rent = Tag.new({'name' => 'Rent'})
+bills = Tag.new({'name' => 'Bills'})
+council_tax = Tag.new({'name' => 'Council Tax'})
+eating_out = Tag.new({'name' => 'Eating out'})
+credit_card = Tag.new({'name' => 'Credit Card'})
+entertainment = Tag.new({'name' => 'Entertainment'})
+nights_out = Tag.new({'name' => 'Nights out'})
+food_shop = Tag.new({'name' => 'Food shop'})
+online_shopping = Tag.new({'name' => 'Online shopping'})
+travel = Tag.new({'name' => 'Travel'})
 
-fags.save()
 rent.save()
-ct.save()
-meals_out.save()
-home_food.save()
+bills.save()
+council_tax.save()
+eating_out.save()
+credit_card.save()
+entertainment.save()
 nights_out.save()
-shopping.save()
+food_shop.save()
+online_shopping.save()
+travel.save()
+
+# Merchants
+landlord = Merchant.new({'name' => 'Landlord'})
+scottish_gas = Merchant.new({'name' => 'Scottish Gas'})
+edinburgh_council = Merchant.new({'name' => 'Edinburgh Council'})
+tesco = Merchant.new({'name' => 'Tesco'})
+margiotta = Merchant.new({'name' => 'Margiotta'})
+nationwide = Merchant.new({'name' => 'Nationwide'})
+amazon = Merchant.new({'name' => 'Amazon'})
+asos = Merchant.new({'name' => 'Asos'})
+henrys = Merchant.new({'name' => 'Henrys Cellar Bar'})
+scotrail = Merchant.new({'name' => 'Scotrail'})
+
+landlord.save()
+scottish_gas.save()
+edinburgh_council.save()
+tesco.save()
+margiotta.save()
+nationwide.save()
+amazon.save()
+asos.save()
+henrys.save()
+scotrail.save()
+
+
 
 # transactions
-buying_fags = Transaction.new({'name' => 'Buying cigarettes','value' => 750, 'merchant_id' => margiotta.id, 'tag_id' => fags.id})
-buying_beer = Transaction.new({'name' => 'Meal at spoons','value' => 10, 'merchant_id' => spoons.id, 'tag_id' => nights_out.id})
-food_shop = Transaction.new({'name' => 'store cupboard','value' => 4000, 'merchant_id' => tesco.id, 'tag_id' => home_food.id})
-socks = Transaction.new({'name' => 'new socks','value' => 50, 'merchant_id' => tesco.id, 'tag_id' => shopping.id})
-buying_fags.save()
-buying_beer.save()
-food_shop.save()
-socks.save
+weekly_shop = Transaction.new(
+  {'name' => 'Weekly food shop',
+    'value' => 40,
+    'merchant_id' => tesco.id,
+    'tag_id' => food_shop.id})
+
+loud_poets = Transaction.new({
+  'name' => 'Loud poets',
+  'value' => 12,
+  'merchant_id' => henrys.id,
+  'tag_id' => nights_out.save()
+})
+
+rent = Transaction.new({
+  'name' => 'Rent',
+  'value' => 400,
+  'transaction_date' => 1/12/17,
+  'merchant_id' => landlord.id,
+  'tag_id' => rent.save()
+})
+
+council_tax = Transaction.new({
+  'name' => 'Council tax',
+  'value' => 50,
+  'transaction_date' => 1/12/17,
+  'merchant_id' => edinburgh_council.id,
+  'tag_id' => council_tax.id
+})
+
+travel = Transaction.new({
+  'name' => 'Stirling trip',
+  'value' => 20,
+  'merchant_id' => scotrail.id,
+  'tag_id' => travel.save()
+})
+
+weekly_shop.save()
+loud_poets.save()
+rent.save()
+council_tax.save()
+travel.save()
+ # how to make save option with date

@@ -21,18 +21,23 @@ class Merchant
     values = [@name, @id]
     SqlRunner.run(sql)
   end
-  
-  def self.delete_all()
+
+  def destroy()
+    sql = "DELETE FROM merchants WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
+  def Merchant.delete_all()
       sql = "DELETE FROM merchants;"
       SqlRunner.run(sql)
   end
 
   def Merchant.find(id)
     sql = "SELECT * FROM merchants WHERE id = $1"
-
     return SqlRunner.run_sql_and_map(sql, Merchant, [id])[0]
   end
-  private
+
 
   def Merchant.all()
       sql = "SELECT * FROM merchants;"

@@ -1,0 +1,19 @@
+<h2>New Tag</h2>
+
+<form action="/tags" method="POST">
+  <label for="tag_input">Name</label>
+  <input id="tag_input" type="text" name="name" required>
+<input type="submit" class="button" value="Save"/>
+
+
+<table>
+  <tr>
+    <th>Tags</th>
+  </tr>
+
+<% for tag in @tags%>
+   <tr>
+     <td><%= tag.name %></td>
+   </tr>
+<% end %>
+</table>
