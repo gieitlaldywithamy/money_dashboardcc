@@ -28,4 +28,8 @@ class TransactionTest < MiniTest::Test
     assert_equal(@tesco, @food_shop)
   end
 
+  def test_transaction_by_id
+    assert_equal('Woo', Transaction.find_by_id(456))
+  end
+
 end

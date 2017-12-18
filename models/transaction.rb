@@ -49,6 +49,12 @@ class Transaction
     return SqlRunner.run_sql_and_map(sql, Transaction)
   end
 
+  def Transaction.find_by_id(id)
+    sql = "SELECT * FROM transactions WHERE id=$1;"
+    values = [id]
+    return SqlRunner.run_sql_and_map(sql, Transaction, values)[0]
+  end
+
   def Transaction.total_spent()
     sql = "SELECT SUM(value) FROM transactions;"
     total_spent = SqlRunner.run(sql)[0].values().first()

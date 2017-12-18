@@ -26,3 +26,8 @@ get('/transactions/new') do
   @tags = Tag.all()
   erb(:'transactions/new')
 end
+
+get('/transactions/:id/edit') do
+  @transaction = Transaction.find_by_id(params['id'].to_i)
+  erb(:'transactions/edit')
+end
