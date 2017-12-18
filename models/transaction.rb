@@ -38,6 +38,7 @@ class Transaction
   end
 
 
+
   def Transaction.delete_all()
     sql = "DELETE FROM transactions;"
     SqlRunner.run(sql)

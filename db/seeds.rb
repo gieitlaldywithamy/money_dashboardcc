@@ -9,7 +9,7 @@ Merchant.delete_all()
 Tag.delete_all()
 AccountSettings.delete_all()
 
-account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 1800)
+account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 1800, 'time_period' => 30)
 account_settings.save()
 
 # Tags
@@ -63,20 +63,20 @@ scotrail.save()
 # transactions
 weekly_shop = Transaction.new(
   {'name' => 'Weekly food shop',
-    'value' => 40,
+    'value' => 40.00,
     'merchant_id' => tesco.id,
     'tag_id' => food_shop.id})
 
 loud_poets = Transaction.new({
   'name' => 'Loud poets',
-  'value' => 12,
+  'value' => 12.00,
   'merchant_id' => henrys.id,
   'tag_id' => nights_out.save()
 })
 
 rent = Transaction.new({
   'name' => 'Rent',
-  'value' => 400,
+  'value' => 400.00,
   'transaction_date' => 1/12/17,
   'merchant_id' => landlord.id,
   'tag_id' => rent.save()
@@ -84,7 +84,7 @@ rent = Transaction.new({
 
 council_tax = Transaction.new({
   'name' => 'Council tax',
-  'value' => 50,
+  'value' => 50.00,
   'transaction_date' => 1/12/17,
   'merchant_id' => edinburgh_council.id,
   'tag_id' => council_tax.id
@@ -92,7 +92,7 @@ council_tax = Transaction.new({
 
 travel = Transaction.new({
   'name' => 'Stirling trip',
-  'value' => 20,
+  'value' => 20.50,
   'merchant_id' => scotrail.id,
   'tag_id' => travel.save()
 })

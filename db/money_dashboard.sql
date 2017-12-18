@@ -16,13 +16,14 @@ CREATE TABLE tags (
 CREATE TABLE account_settings (
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
-  budget_limit NUMERIC(8,2) NOT NULL
+  budget_limit NUMERIC(8,2) NOT NULL,
+  time_period INT4
 );
 
 CREATE TABLE transactions (
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
-  value INT4,
+  value NUMERIC(8,2) NOT NULL,
   transaction_date DATE NOT NULL DEFAULT CURRENT_DATE,
   merchant_id INT4 REFERENCES merchants(id) ON DELETE CASCADE,
   tag_id INT4 REFERENCES tags(id) ON DELETE CASCADE
