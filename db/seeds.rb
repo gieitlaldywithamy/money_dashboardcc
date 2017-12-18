@@ -93,6 +93,7 @@ council_tax = Transaction.new({
 travel = Transaction.new({
   'name' => 'Stirling trip',
   'value' => 20.50,
+  'transaction_date' => 5/12/17,
   'merchant_id' => scotrail.id,
   'tag_id' => travel.save()
 })

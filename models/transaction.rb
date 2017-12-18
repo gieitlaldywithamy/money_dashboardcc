@@ -5,7 +5,7 @@ require_relative('./tag.rb')
 
 class Transaction
 
-  attr_reader :name, :value, :transaction_date, :merchant_id, :tag_id
+  attr_reader :id, :name, :value, :transaction_date, :merchant_id, :tag_id
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
@@ -15,7 +15,15 @@ class Transaction
     @tag_id = options['tag_id'].to_i()
   end
 
-  def save()
+  def save
+    if @id
+      edit()
+    else
+      insert()
+    end
+  end
+
+  def insert()
     sql = "INSERT INTO transactions (name, value, merchant_id, tag_id) VALUES ($1, $2, $3, $4) RETURNING id;"
     values = [@name, @value,@merchant_id, @tag_id]
     # auto generating date make optional? how?
@@ -24,8 +32,8 @@ class Transaction
   end
 
   def edit()
-    sql = "UPDATE transactions SET (name, value, merchant_id, tag_id) VALUES ($1, $2, $3, $4) WHERE id = $5;"
-    values = [@name, @value, @merchant_id, @tag_id, @id]
+    sql = "UPDATE transactions SET (name, value, transaction_date, merchant_id, tag_id) = ($1, $2, $3, $4, $5) WHERE id = $6;"
+    values = [@name, @value, @transaction_date, @merchant_id, @tag_id, @id]
     SqlRunner.run(sql, values)
   end
 

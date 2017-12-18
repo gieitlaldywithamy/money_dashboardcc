@@ -27,7 +27,22 @@ get('/transactions/new') do
   erb(:'transactions/new')
 end
 
-get('/transactions/:id/edit') do
+get('/transactions/:id/show') do
   @transaction = Transaction.find_by_id(params['id'].to_i)
+  erb(:'transactions/show')
+end
+
+post ('/transactions/:id') do
+  # transaction = Transaction.find_by_id(params['id'].to_i)
+  transaction = Transaction.new(params)
+  binding.pry
+  transaction.edit()
+  redirect to("/transactions")
+end
+
+get('/transactions/:id/edit') do
+  @transaction = Transaction.find_by_id(params['id'])
+  @merchants = Merchant.all()
+  @tags = Tag.all()
   erb(:'transactions/edit')
 end

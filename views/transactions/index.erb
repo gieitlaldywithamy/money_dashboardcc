@@ -20,6 +20,7 @@
     <td><%= transaction.tag.name %></td>
     <td>|</td>
     <td><%= transaction.merchant.name %></td>
+    <td> <a href="/transactions/<%= transaction.id %>/show">Details</a> </td>
   </tr>
   <% end %>
 
