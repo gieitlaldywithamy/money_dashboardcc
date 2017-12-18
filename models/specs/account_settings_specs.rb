@@ -14,7 +14,7 @@ class AccountSettingsTest < MiniTest::Test
     Tag.delete_all()
     AccountSettings.delete_all()
 
-    account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 400, 'time_period' => 30)
+    account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 400, 'time_period_end' => '2018-02-18')
     account_settings.save()
 
     # Tags
@@ -112,9 +112,14 @@ class AccountSettingsTest < MiniTest::Test
 
   end
 
-  def test_account_settings
+  def test_account_settings_name
     current_account = AccountSettings.current_account()
     assert_equal('Amy', current_account.name)
+  end
+
+  def test_account_settings_days
+    current_account = AccountSettings.current_account()
+    assert_equal(62, current_account.how_many_days)
   end
 
   def test_on_budget()

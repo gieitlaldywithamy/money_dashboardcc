@@ -9,7 +9,7 @@ Merchant.delete_all()
 Tag.delete_all()
 AccountSettings.delete_all()
 
-account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 1800, 'time_period' => 30)
+account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 1800, 'time_period_end' => ' 2018-1-18')
 account_settings.save()
 
 # Tags

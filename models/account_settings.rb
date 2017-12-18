@@ -2,29 +2,35 @@ require('./db/sql_runner')
 
 class AccountSettings
 
-  attr_reader :id, :name, :budget_limit
+  attr_reader :id, :name, :budget_limit, :time_period_start, :time_period_days
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @budget_limit = options['budget_limit'].to_f
-    @time_period = options['time_period']
+    @time_period_start = options['time_period_start']
+    @time_period_end = options['time_period_end']
   end
 
   def save()
-    sql = "INSERT INTO account_settings (name, budget_limit, time_period) VALUES ($1, $2, $3) RETURNING id;"
-    values = [@name, @budget_limit, @time_period]
+    sql = "INSERT INTO account_settings (name, budget_limit, time_period_end) VALUES ($1, $2, $3) RETURNING id;"
+    # how to find out a month from time_period_start
+    values = [@name, @budget_limit, @time_period_end]
     account_settings = SqlRunner.run(sql, values)
     @id = account_settings[0]['id'].to_i
   end
 
   def update()
-    sql = "UPDATE account_settings SET (name, budget_limit, time_period) = ($1, $2) WHERE id=$3;"
-    values = [@name, @monthly_budget_limit, @time_period, @id]
+    sql = "UPDATE account_settings SET (name, budget_limit, time_period_start, time_period_end) = ($1, $2, $3, $4) WHERE id=$5;"
+    values = [@name, @budget_limit, @time_period_start, @time_period_end, @id]
     SqlRunner.run(sql, values)
   end
 
 
+  def how_many_days()
+    sql = "SELECT time_period_end - time_period_start FROM account_settings WHERE id=$1"
+    return SqlRunner.run(sql, [@id]).values[0][0].to_i
+  end
 
   def over_budget()
      how_much_spent = Transaction.total_spent.to_f
