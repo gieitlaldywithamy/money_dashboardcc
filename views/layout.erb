@@ -4,17 +4,29 @@
     <meta charset="utf-8">
     <title>Frugal</title>
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <nav>
-      <a href="/transactions">Balance sheet</a>
-      <a href="/transactions/new">Add entry</a>
-      <a href="/merchants">List where I spend my money</a>
-      <a href="/merchants/new">Add new merchant</a>
-      <a href="/tags">See all tags</a>
-      <a href="/tags/new">Add new tag</a>
-    </nav>
+    <div id = "container">
+    <header>
+        <h1>Frugal</h1>
+    </header>
+    <div id = "contents">
+      <nav>
+        <ul>
+          <li><a href="/transactions">See all transactions</a></li>
+
+          <li><a href="/transactions/new">Add entry</a></li>
+          <li><a href="/merchants">List where I spend my money</a></li>
+          <li><a href="/merchants/new">Add new merchant</a></li>
+          <li><a href="/tags">See all tags</a></li>
+          <li><a href="/tags/new">Add new tag</a></li>
+        </ul>
+      </nav>
+      <main>
     <%= yield %>
+  </main>
+  </div>
+  </div>
   </body>
 </html>
