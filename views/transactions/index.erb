@@ -23,7 +23,7 @@
       <td class="text-left"> <%= transaction.transaction_date %></td>
       <td class="text-left"> <%= transaction.tag.name %></td>
       <td class="text-left"> <%= transaction.merchant.name %></td>
-      <td class="text-left"> <a href="/transactions/<%= transaction.id %>/show">Details</a> </td>
+      <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>/show">Details</a> </td>
     </tr>
     <% end %>
   </tbody>

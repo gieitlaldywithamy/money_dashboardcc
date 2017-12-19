@@ -1,4 +1,18 @@
+
+
+<a href="/<%=@account_id%>/transactions/<%= @transaction.id %>/edit">Edit</a>
+
+
 <p><%= @transaction.name %>
 <%= @transaction.value %>
-</p>
-<a href="/transactions/<%= @transaction.id %>/edit">Edit</a>
+<%= @transaction.transaction_date %>
+<%= @transaction.merchant.name %>
+<%= @transaction.tag.name %></p>
+
+<!-- @id = options['id'].to_i if options['id']
+@name = options['name']
+@value = options['value']
+@transaction_date = options['transaction_date']
+@merchant_id = options['merchant_id'].to_i()
+@tag_id = options['tag_id'].to_i()
+@account_id = options['account_id'] -->

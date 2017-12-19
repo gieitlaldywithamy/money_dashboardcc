@@ -32,7 +32,19 @@ end
 
 get('/:account_id/transactions/:transaction_id/show') do
   @transaction = Transaction.find_by_id(params['account_id'].to_i, params['transaction_id'].to_i)
+  @account_id = params['account_id'].to_i
   erb(:'transactions/show')
+end
+
+
+get('/:account_id/transactions/:transaction_id/edit') do
+  @transaction = Transaction.find_by_id(params['account_id'].to_i, params['transaction_id'].to_i)
+  @account_id = params['account_id'].to_i
+  p @transaction
+  @merchant = @transaction.merchant
+  @merchants = Merchant.all
+  @tags = Tag.all
+  erb(:'transactions/edit')
 end
 
 # post ('/transactions/:id') do

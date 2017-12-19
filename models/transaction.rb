@@ -76,7 +76,7 @@ class Transaction
     FROM transactions
     WHERE account_id=$1 AND id = $2;"
     values = [user_id, transaction_id]
-    return SqlRunner.run_sql_and_map(sql, Transaction, values)
+    return SqlRunner.run_sql_and_map(sql, Transaction, values)[0]
   end
 
 
