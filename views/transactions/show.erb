@@ -9,6 +9,9 @@
 <%= @transaction.merchant.name %>
 <%= @transaction.tag.name %></p>
 
+<form method="post" action="/<%=@account_id%>/transactions/<%= @transaction.id %>/delete">
+  <input type="submit" value="Delete"/>
+</form>
 <!-- @id = options['id'].to_i if options['id']
 @name = options['name']
 @value = options['value']

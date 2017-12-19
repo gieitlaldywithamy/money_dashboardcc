@@ -41,7 +41,7 @@
  <input type="submit" name="" value="Save">
 </form> -->
 
-<form class="" action="/<%=@account_id%>/transactions" method="post">
+<form class="" action="/<%=@account_id%>/transactions/<%=@transaction.id%>" method="post">
 
   <label for="name_input">Name</label>
   <input type="text" name="name" value="<%= @transaction.name%>" id="name_input">
@@ -54,21 +54,26 @@
  <label for="transaction date">Date</label>
 <input type="date" name="transaction_date" value="<%= @transaction.transaction_date %>">
 
- <input type="number" name="value" value="<%= @transaction.value %>" id="value_input">
- <br>
 
  <label for="merchant_select">Merchant</label>
- <select class="" name="merchant_id" id="merchant_select">
+ <select selected = "<%= @merchant_id %>"  name="merchant_id" id="merchant_select">
    <% @merchants.each do |merchant| %>
-  <option value="<%= merchant.id %>"><%= merchant.name %></option>
+
+   <% if merchant.id == @transaction.merchant_id %>
+      <option value=<%= merchant.id %> selected><%= merchant.name %></option>
+    <% else %>
+      <option value=<%= merchant.id %>><%= merchant.name %></option>
+    <% end %>
   <% end %>
  </select>
 
- <select class="" name="tag_id" id="tag_select">
-   <% @tags.each do |tag| %>
-  <option value="<%= tag.id %>"><%= tag.name %></option>
-  <% end %>
- </select>
+ <label for="tag_select">Tags</label>
+  <select  name="tag_id" id="tag_select" selected = "<%= @transaction.tag_id %>">
+    <% @tags.each do |tag| %>
+     <option value="<%= tag.id %>" <%= "selected" if tag.id == @transaction.tag_id %>><%= tag.name %></option>
+
+   <% end %>
+  </select>
  <br>
   <input type="submit" name="" value="Save">
 </form>
