@@ -2,7 +2,7 @@ require('./db/sql_runner')
 
 class AccountSettings
 
-  attr_reader :id, :name, :budget_limit, :time_period_start, :time_period_days
+  attr_reader :id, :name, :budget_limit, :time_period_start, :time_period_end
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -33,13 +33,14 @@ class AccountSettings
   end
 
   def over_budget()
-     how_much_spent = Transaction.total_spent.to_f
+     how_much_spent = Transaction.total_spent
      return how_much_spent > @budget_limit
   end
 
-  def AccountSettings.current_account()
-    sql = "SELECT * FROM account_settings"
-    return SqlRunner.run_sql_and_map(sql, AccountSettings).first()
+
+  def AccountSettings.find(id)
+    sql = "SELECT * FROM account_settings WHERE id = $1"
+    return SqlRunner.run_sql_and_map(sql, AccountSettings, [id])[0]
   end
 
   def AccountSettings.delete_all()

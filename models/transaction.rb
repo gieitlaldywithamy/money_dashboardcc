@@ -5,7 +5,7 @@ require_relative('./tag.rb')
 
 class Transaction
 
-  attr_reader :id, :name, :value, :transaction_date, :merchant_id, :tag_id
+  attr_reader :id, :name, :value, :transaction_date, :merchant_id, :tag_id, :account_id
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
@@ -13,6 +13,7 @@ class Transaction
     @transaction_date = options['transaction_date']
     @merchant_id = options['merchant_id'].to_i()
     @tag_id = options['tag_id'].to_i()
+    @account_id = options['account_id']
   end
 
   def save
@@ -24,16 +25,16 @@ class Transaction
   end
 
   def insert()
-    sql = "INSERT INTO transactions (name, value, merchant_id, tag_id) VALUES ($1, $2, $3, $4) RETURNING id;"
-    values = [@name, @value,@merchant_id, @tag_id]
+    sql = "INSERT INTO transactions (name, value, merchant_id, tag_id, account_id) VALUES ($1, $2, $3, $4, $5) RETURNING id;"
+    values = [@name, @value,@merchant_id, @tag_id, @account_id]
     # auto generating date make optional? how?
     transaction = SqlRunner.run(sql, values)
     @id = transaction[0]['id'].to_i()
   end
 
   def edit()
-    sql = "UPDATE transactions SET (name, value, transaction_date, merchant_id, tag_id) = ($1, $2, $3, $4, $5) WHERE id = $6;"
-    values = [@name, @value, @transaction_date, @merchant_id, @tag_id, @id]
+    sql = "UPDATE transactions SET (name, value, transaction_date, merchant_id, tag_id, account_id) = ($1, $2, $3, $4, $5, $6) WHERE id = $7;"
+    values = [@name, @value, @transaction_date, @merchant_id, @tag_id, @account_id, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -45,7 +46,9 @@ class Transaction
     tag = Tag.find(@tag_id)
   end
 
-
+  def account()
+    account = AccountSettings.find(@account_id)
+  end
 
   def Transaction.delete_all()
     sql = "DELETE FROM transactions;"

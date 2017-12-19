@@ -1,6 +1,11 @@
 <form class="" action="/transactions" method="post">
+
+  <label for="description_input">Description</label>
+  <input type="text" name="name" value="" id="description_input">
+  <br>
+
  <label for="value_input">How much?</label>
- <input type="text" name="value" value="" id="value_input">
+ <input type="number" name="value" step="any" min="0" value="" id="value_input">
  <br>
 
  <label for="merchant_select">Merchant</label>
@@ -9,8 +14,10 @@
   <option value="<%= merchant.id %>"><%= merchant.name %></option>
   <% end %>
  </select>
+<br>
 
- <select class="" name="tag_id" id="tag_select">
+<label for="tag_select">Tag</label>
+ <select name="tag_id" id="tag_select">
    <% @tags.each do |tag| %>
   <option value="<%= tag.id %>"><%= tag.name %></option>
   <% end %>
