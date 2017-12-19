@@ -13,7 +13,7 @@ get('/:id/transactions') do
    # @user = User.find(id)
   @transactions = Transaction.all(params[:id].to_i)
 
-
+  p params,
   @name = User.find(params[:id].to_i).name
   # @tag = Tag.all()[1]
   erb(:'transactions/index')
@@ -50,12 +50,14 @@ get('/:account_id/transactions/:transaction_id/edit') do
   erb(:'transactions/edit')
 end
 
+
+
 post ('/:account_id/transactions/:transaction_id') do # update
   @transaction = Transaction.new(params)
   p params[:id]
   p @transaction
   @transaction.save
-  redirect('/:account_id/transactions')
+  redirect to "/#{@transaction.account_id}/transactions"
 end
 
 post('/:account_id/transactions/:transaction_id/delete') do

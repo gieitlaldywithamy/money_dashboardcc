@@ -70,7 +70,6 @@ class Transaction
   def Transaction.transaction_by_month(month)
     sql = "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1"
     values = [month]
-    p SqlRunner.run_sql_and_map(sql, Transaction, [month])
     return SqlRunner.run_sql_and_map(sql, Transaction, [month])
   end
 

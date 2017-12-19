@@ -34,8 +34,8 @@ class User
   end
 
   def over_budget()
-     how_much_spent = Transaction.total_spent
-     return how_much_spent > @budget_limit
+    p spent(), @budget_limit
+     return spent().to_f > @budget_limit
   end
 
   def spent()
