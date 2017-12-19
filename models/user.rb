@@ -44,6 +44,11 @@ class User
     return SqlRunner.run_sql_and_map(sql, User, [id])[0]
   end
 
+  def User.all()
+    sql = "SELECT * FROM users;"
+    return SqlRunner.run_sql_and_map(sql, User)
+  end
+
   def User.delete_all()
     sql = "DELETE FROM users;"
     SqlRunner.run(sql)
