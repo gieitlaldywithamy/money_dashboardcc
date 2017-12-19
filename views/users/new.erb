@@ -1,0 +1,28 @@
+
+
+  @name = options['name']
+  @budget_limit = options['budget_limit'].to_f
+  @time_period_start = options['time_period_start']
+  @time_period_end = options['time_period_end']
+
+
+  <form class="" action="/users" method="post">
+    <%= @account_id %>
+    <label for="user_name">Name</label>
+    <input type="text" name="name" value="" id="user_input">
+    <br>
+
+   <label for="budget_limit">What's your budget?</label>
+   <input type="number" name="budget_limit" step="any" min="0" value="" id="value_input">
+   <br>
+
+   <label for="time_period_start">Starting from</label>
+   <input type="date" name="time_period_start" value="">
+  <br>
+
+  <label for="time_period_end">Ending</label>
+  <input type="date" name="time_period_end" value="">
+ <br>
+
+    <input type="submit" name="" value="Save">
+  </form>

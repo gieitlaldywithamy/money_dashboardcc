@@ -13,11 +13,11 @@ class User
   end
 
   def save()
-    sql = "INSERT INTO users (name, budget_limit, time_period_end) VALUES ($1, $2, $3) RETURNING id;"
+    sql = "INSERT INTO users (name, budget_limit, time_period_start, time_period_end) VALUES ($1, $2, $3, $4) RETURNING id;"
     # how to find out a month from time_period_start
-    values = [@name, @budget_limit, @time_period_end]
+    values = [@name, @budget_limit, @time_period_start, @time_period_end]
     user = SqlRunner.run(sql, values)
-    @time_period_start = user[0]['time_period_end']
+
     @id = user[0]['id'].to_i
   end
 
@@ -31,6 +31,11 @@ class User
   def how_many_days()
     sql = "SELECT time_period_end - time_period_start FROM users WHERE id=$1"
     return SqlRunner.run(sql, [@id]).values[0][0].to_i
+  end
+
+  def budget_percent()
+    p spent(), @budget_limit, " percent wise"
+    return (spent().to_f/@budget_limit)*100
   end
 
   def over_budget()

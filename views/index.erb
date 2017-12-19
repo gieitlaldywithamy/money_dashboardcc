@@ -14,14 +14,15 @@
     <tr>
       <th>Name</th>
       <th>Budget</th>
-      <th>Days left</th>
     </tr>
     <% for user in @users %>
     <tr>
     <td><%= user.name %></td>
-    <td><%= user.budget_limit %></td>
-    <td><%= user.how_many_days %></td>
-  <td><%= user.over_budget %></td>
+    <td>
+    <progress class="budget" max="100" value="<%= user.budget_percent %>">
+      <strong><%= user.budget_percent %></strong>
+    </progress>
+  </td>
 </tr>
     <% end %>
 

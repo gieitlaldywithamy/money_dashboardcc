@@ -16,3 +16,14 @@ get('/users') do
   # @tag = Tag.all()[1]
   erb(:'users/index')
 end
+
+get('/users/new') do
+  erb(:'users/new')
+end
+
+post('/users') do
+
+  @user = User.new(params)
+  @user.save()
+  redirect to "/users"
+end
