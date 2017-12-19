@@ -11,6 +11,5 @@ require_relative('./models/merchant.rb')
 require_relative('./models/user.rb')
 
 get '/' do
-    @account =  User.current_account()
     erb(:index)
 end

@@ -1,7 +1,7 @@
 require ("minitest/autorun")
 require ("minitest/rg")
 
-require_relative("../account_settings")
+require_relative("../user")
 require_relative("../merchant")
 require_relative("../tag")
 require_relative("../transaction")
@@ -12,10 +12,10 @@ class AccountSettingsTest < MiniTest::Test
     Transaction.delete_all()
     Merchant.delete_all()
     Tag.delete_all()
-    AccountSettings.delete_all()
+    User.delete_all()
 
-    account_settings = AccountSettings.new('name' => 'Amy','budget_limit' => 400, 'time_period_end' => '2018-02-18')
-    account_settings.save()
+    @account_settings = User.new('name' => 'Amy','budget_limit' => 400, 'time_period_end' => '2018-02-18')
+    @account_settings.save()
 
     # Tags
     rent = Tag.new({'name' => 'Rent'})
@@ -66,66 +66,70 @@ class AccountSettingsTest < MiniTest::Test
 
 
     # transactions
-    weekly_shop = Transaction.new(
-      {'name' => 'Weekly food shop',
-        'value' => 45.60,
-        'merchant_id' => tesco.id,
-        'tag_id' => food_shop.id})
+    # weekly_shop = Transaction.new(
+    #   {'name' => 'Weekly food shop',
+    #     'value' => 45.60,
+    #     'merchant_id' => tesco.id,
+    #     'tag_id' => food_shop.id})
+    #
+    # loud_poets = Transaction.new({
+    #   'name' => 'Loud poets',
+    #   'value' => 12.00,
+    #   'merchant_id' => henrys.id,
+    #   'tag_id' => nights_out.save()
+    # })
+    #
+    # rent = Transaction.new({
+    #   'name' => 'Rent',
+    #   'value' => 400.00,
+    #   'transaction_date' => 1/12/17,
+    #   'merchant_id' => landlord.id,
+    #   'tag_id' => rent.save()
+    # })
+    #
+    # council_tax = Transaction.new({
+    #   'name' => 'Council tax',
+    #   'value' => 50.00,
+    #   'transaction_date' => 1/12/17,
+    #   'merchant_id' => edinburgh_council.id,
+    #   'tag_id' => council_tax.id
+    # })
+    #
+    # travel = Transaction.new({
+    #   'name' => 'Stirling trip',
+    #   'value' => 20.50,
+    #   'merchant_id' => scotrail.id,
+    #   'tag_id' => travel.save()
+    # })
 
-    loud_poets = Transaction.new({
-      'name' => 'Loud poets',
-      'value' => 12.00,
-      'merchant_id' => henrys.id,
-      'tag_id' => nights_out.save()
-    })
-
-    rent = Transaction.new({
-      'name' => 'Rent',
-      'value' => 400.00,
-      'transaction_date' => 1/12/17,
-      'merchant_id' => landlord.id,
-      'tag_id' => rent.save()
-    })
-
-    council_tax = Transaction.new({
-      'name' => 'Council tax',
-      'value' => 50.00,
-      'transaction_date' => 1/12/17,
-      'merchant_id' => edinburgh_council.id,
-      'tag_id' => council_tax.id
-    })
-
-    travel = Transaction.new({
-      'name' => 'Stirling trip',
-      'value' => 20.50,
-      'merchant_id' => scotrail.id,
-      'tag_id' => travel.save()
-    })
 
 
-
-    weekly_shop.save()
-    loud_poets.save()
-    rent.save()
-    council_tax.save()
-    travel.save()
+    # weekly_shop.save()
+    # loud_poets.save()
+    # rent.save()
+    # council_tax.save()
+    # travel.save()
 
   end
 
-  def test_account_settings_name
-    current_account = AccountSettings.current_account()
-    assert_equal('Amy', current_account.name)
-  end
+  # def test_account_settings_name
+  #   current_account = AccountSettings.current_account()
+  #   assert_equal('Amy', current_account.name)
+  # end
+  #
+  # def test_account_settings_days
+  #   current_account = AccountSettings.current_account()
+  #   assert_equal(62, current_account.how_many_days)
+  # end
+  #
+  # def test_on_budget()
+  #   current_account = AccountSettings.current_account()
+  #
+  #   assert_equal(true, current_account.over_budget)
+  # end
 
-  def test_account_settings_days
-    current_account = AccountSettings.current_account()
-    assert_equal(62, current_account.how_many_days)
-  end
-
-  def test_on_budget()
-    current_account = AccountSettings.current_account()
-
-    assert_equal(true, current_account.over_budget)
+  def test_transaction_by_id
+    assert_equal(@account_settings, Transaction.all(@account_settings.id))
   end
 
 end

@@ -55,16 +55,21 @@ class Transaction
     SqlRunner.run(sql)
   end
 
-  def Transaction.all()
-    sql = "SELECT * FROM transactions;"
-    return SqlRunner.run_sql_and_map(sql, Transaction)
+  def Transaction.all(id)
+    sql = "SELECT * FROM transactions WHERE account_id = $1;"
+    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
+    return transactions
   end
 
-  def Transaction.find_by_id(id)
-    sql = "SELECT * FROM transactions WHERE id=$1;"
-    values = [id]
-    return SqlRunner.run_sql_and_map(sql, Transaction, values)[0]
+  def Transaction.find_by_id(user_id, transaction_id)
+    # change this to find another inner join, completely unnecessary
+    sql = "SELECT *
+    FROM transactions INNER JOIN users ON users.id = transactions.account_id
+    WHERE transactions.id=$1 AND users.id = $2;"
+    values = [user_id, transaction_id]
+    return SqlRunner.run_sql_and_map(sql, Transaction, values)
   end
+
 
   def Transaction.total_spent()
     sql = "SELECT SUM(value) FROM transactions;"

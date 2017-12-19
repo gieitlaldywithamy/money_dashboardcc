@@ -7,7 +7,7 @@ require_relative('../models/user')
 Transaction.delete_all()
 Merchant.delete_all()
 Tag.delete_all()
-AccountSettings.delete_all()
+User.delete_all()
 
 user1 = User.new('name' => 'Amy','budget_limit' => 1800, 'time_period_end' => '2018-1-18')
 user1.save()

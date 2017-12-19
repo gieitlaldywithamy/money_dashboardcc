@@ -1,5 +1,6 @@
-<form class="" action="/transactions" method="post">
 
+<form class="" action="/<%=@account_id%>/transactions" method="post">
+  <%= @account_id %>
   <label for="description_input">Description</label>
   <input type="text" name="name" value="" id="description_input">
   <br>
