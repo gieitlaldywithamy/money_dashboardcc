@@ -23,7 +23,9 @@ end
 
 post('/users') do
 
-  @user = User.new(params)
-  @user.save()
-  redirect to "/users"
+
+    @user = User.new(params)
+    @user.save()
+    redirect to "/users"
+  
 end

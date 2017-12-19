@@ -2,36 +2,43 @@ require('./db/sql_runner')
 
 class User
 
-  attr_reader :id, :name, :budget_limit, :time_period_start, :time_period_end
+  attr_reader :id, :name, :budget_limit
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @budget_limit = options['budget_limit'].to_f
-    @time_period_start = options['time_period_start']
-    @time_period_end = options['time_period_end']
+    # @time_period_start = options['time_period_start']
+    # @time_period_end = options['time_period_end']
   end
 
+  # def santise_months(begin_month, end_month)
+  #   begin_month = begin_month.split('-')
+  #   end_month = end_month.split('-')
+  #
+  # end
+
   def save()
-    sql = "INSERT INTO users (name, budget_limit, time_period_start, time_period_end) VALUES ($1, $2, $3, $4) RETURNING id;"
+
+    sql = "INSERT INTO users (name, budget_limit) VALUES ($1, $2) RETURNING id;"
     # how to find out a month from time_period_start
-    values = [@name, @budget_limit, @time_period_start, @time_period_end]
+    values = [@name, @budget_limit]
     user = SqlRunner.run(sql, values)
 
     @id = user[0]['id'].to_i
   end
 
   def update()
-    sql = "UPDATE users SET (name, budget_limit, time_period_start, time_period_end) = ($1, $2, $3, $4) WHERE id=$5;"
-    values = [@name, @budget_limit, @time_period_start, @time_period_end, @id]
+    sql = "UPDATE users SET (name, budget_limit) = ($1, $2, $3, $4) WHERE id=$5;"
+    values = [@name, @budget_limit, @id]
     SqlRunner.run(sql, values)
   end
 
 
-  def how_many_days()
-    sql = "SELECT time_period_end - time_period_start FROM users WHERE id=$1"
-    return SqlRunner.run(sql, [@id]).values[0][0].to_i
-  end
+  # def how_many_days()
+  #   sql = "SELECT time_period_end - time_period_start FROM users WHERE id=$1"
+  #   return SqlRunner.run(sql, [@id]).values[0][0].to_i
+  # end
 
   def budget_percent()
     p spent(), @budget_limit, " percent wise"
