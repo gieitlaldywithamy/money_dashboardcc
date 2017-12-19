@@ -61,11 +61,20 @@ class Transaction
     return transactions
   end
 
+  # def Transaction.find_by_id(user_id, transaction_id)
+  #   # change this to find another inner join, completely unnecessary
+  #   sql = "SELECT *
+  #   FROM transactions INNER JOIN users ON users.id = transactions.account_id
+  #   WHERE transactions.id=$1 AND users.id = $2;"
+  #   values = [user_id, transaction_id]
+  #   return SqlRunner.run_sql_and_map(sql, Transaction, values)
+  # end
+
   def Transaction.find_by_id(user_id, transaction_id)
     # change this to find another inner join, completely unnecessary
     sql = "SELECT *
-    FROM transactions INNER JOIN users ON users.id = transactions.account_id
-    WHERE transactions.id=$1 AND users.id = $2;"
+    FROM transactions
+    WHERE account_id=$1 AND id = $2;"
     values = [user_id, transaction_id]
     return SqlRunner.run_sql_and_map(sql, Transaction, values)
   end
