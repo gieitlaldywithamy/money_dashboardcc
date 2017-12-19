@@ -67,6 +67,16 @@ class Transaction
     return transactions
   end
 
+  def Transaction.transaction_by_month(month)
+    sql = "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1"
+    values = [month]
+    p SqlRunner.run_sql_and_map(sql, Transaction, [month])
+    return SqlRunner.run_sql_and_map(sql, Transaction, [month])
+  end
+
+
+
+
   # def Transaction.find_by_id(user_id, transaction_id)
   #   # change this to find another inner join, completely unnecessary
   #   sql = "SELECT *

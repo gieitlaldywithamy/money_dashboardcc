@@ -12,5 +12,6 @@ require_relative('./models/merchant.rb')
 require_relative('./models/user.rb')
 
 get '/' do
+  @users = User.all
     erb(:index)
 end

@@ -12,7 +12,10 @@
     </header>
     <div id = "contents">
       <nav>
+        <h1></h1>
         <ul>
+          <%= @name? 'present' : 'coleção' %>
+
           <li><a href="/transactions">See all transactions</a></li>
 
           <li><a href="/transactions/new">Add entry</a></li>

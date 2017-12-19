@@ -12,6 +12,9 @@ require_relative('../models/merchant.rb')
 get('/:id/transactions') do
    # @user = User.find(id)
   @transactions = Transaction.all(params[:id].to_i)
+
+
+  @name = User.find(params[:id].to_i).name
   # @tag = Tag.all()[1]
   erb(:'transactions/index')
 end
@@ -20,6 +23,7 @@ post('/:id/transactions') do
   params['account_id'] = params.delete(:id)
   @transaction = Transaction.new(params)
   @transaction.save()
+  @account_id = params['account_id']
   redirect to "/#{@transaction.account_id}/transactions"
 end
 

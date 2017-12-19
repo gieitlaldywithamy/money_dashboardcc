@@ -38,6 +38,13 @@ class User
      return how_much_spent > @budget_limit
   end
 
+  def spent()
+    sql = "SELECT SUM(value) FROM transactions WHERE account_id = $1;"
+    values = [@id]
+    return SqlRunner.run(sql, values)[0].values().first()
+  end
+
+
 
   def User.find(id)
     sql = "SELECT * FROM users WHERE id = $1"
