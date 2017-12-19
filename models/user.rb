@@ -1,6 +1,6 @@
 require('./db/sql_runner')
 
-class AccountSettings
+class User
 
   attr_reader :id, :name, :budget_limit, :time_period_start, :time_period_end
 
@@ -13,22 +13,23 @@ class AccountSettings
   end
 
   def save()
-    sql = "INSERT INTO account_settings (name, budget_limit, time_period_end) VALUES ($1, $2, $3) RETURNING id;"
+    sql = "INSERT INTO user (name, budget_limit, time_period_end) VALUES ($1, $2, $3) RETURNING id;"
     # how to find out a month from time_period_start
     values = [@name, @budget_limit, @time_period_end]
-    account_settings = SqlRunner.run(sql, values)
-    @id = account_settings[0]['id'].to_i
+    user = SqlRunner.run(sql, values)
+    @time_period_start = user[0]['time_period_end']
+    @id = user[0]['id'].to_i
   end
 
   def update()
-    sql = "UPDATE account_settings SET (name, budget_limit, time_period_start, time_period_end) = ($1, $2, $3, $4) WHERE id=$5;"
+    sql = "UPDATE user SET (name, budget_limit, time_period_start, time_period_end) = ($1, $2, $3, $4) WHERE id=$5;"
     values = [@name, @budget_limit, @time_period_start, @time_period_end, @id]
     SqlRunner.run(sql, values)
   end
 
 
   def how_many_days()
-    sql = "SELECT time_period_end - time_period_start FROM account_settings WHERE id=$1"
+    sql = "SELECT time_period_end - time_period_start FROM user WHERE id=$1"
     return SqlRunner.run(sql, [@id]).values[0][0].to_i
   end
 
@@ -39,12 +40,12 @@ class AccountSettings
 
 
   def AccountSettings.find(id)
-    sql = "SELECT * FROM account_settings WHERE id = $1"
+    sql = "SELECT * FROM user WHERE id = $1"
     return SqlRunner.run_sql_and_map(sql, AccountSettings, [id])[0]
   end
 
   def AccountSettings.delete_all()
-    sql = "DELETE FROM account_settings;"
+    sql = "DELETE FROM user;"
     SqlRunner.run(sql)
   end
 end

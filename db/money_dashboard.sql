@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS tags;
 DROP TABLE IF EXISTS merchants;
-DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE merchants (
   id SERIAL4 PRIMARY KEY,
@@ -10,10 +10,10 @@ CREATE TABLE merchants (
 
 CREATE TABLE tags (
   id SERIAL4 PRIMARY KEY,
-  name VARCHAR(255)
+  name VARCHAR(255) UNIQUE
 );
 
-CREATE TABLE user (
+CREATE TABLE users (
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
   budget_limit NUMERIC(8,2) NOT NULL,
@@ -28,5 +28,5 @@ CREATE TABLE transactions (
   transaction_date DATE NOT NULL DEFAULT CURRENT_DATE,
   merchant_id INT4 REFERENCES merchants(id) ON DELETE CASCADE,
   tag_id INT4 REFERENCES tags(id) ON DELETE CASCADE,
-  account_id INT4 REFERENCES transactions(id) ON DELETE CASCADE,
+  account_id INT4 REFERENCES users(id) ON DELETE CASCADE
 );

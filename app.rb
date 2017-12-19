@@ -8,9 +8,9 @@ require_relative('./controllers/tag_controller.rb')
 require_relative('./models/transaction.rb')
 require_relative('./models/tag.rb')
 require_relative('./models/merchant.rb')
-require_relative('./models/account_settings.rb')
+require_relative('./models/user.rb')
 
 get '/' do
-    @account =  AccountSettings.current_account()
+    @account =  User.current_account()
     erb(:index)
 end

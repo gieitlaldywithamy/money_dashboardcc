@@ -47,7 +47,7 @@ class Transaction
   end
 
   def account()
-    account = AccountSettings.find(@account_id)
+    account = User.find(@account_id)
   end
 
   def Transaction.delete_all()
