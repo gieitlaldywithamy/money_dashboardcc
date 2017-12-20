@@ -6,10 +6,8 @@
 header {
   background-color: #CAE9EC;
   padding: 1em;
-}
-
-col-2, article {
-  background-color: #E0E0E0;
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 40px;
 }
 
 
@@ -17,30 +15,37 @@ col-2, article {
 
 * {
     box-sizing: border-box;
+
   }
   body {
     display: flex;
-    min-height: 100vh;
     flex-direction: row;
     margin: 0;
+    font-family: 'Barlow', sans-serif;
   }
   .col-1 {
     background: #FFB6C1;
     flex: 1;
+
   }
   .col-2 {
     display: flex;
     flex-direction: column;
     flex: 5;
+    padding-bottom: 1em;
+
   }
   .content {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    background-color: #E0E0E0;
+    padding-bottom: 10em;
   }
-  .content > article {
+  /* .content > article {
     flex: 4;
     min-height: 60vh;
-  }
+  } */
 
 
 
@@ -73,7 +78,7 @@ tr:hover td {
   color:#FFFFFF;
 
 }
-/* 
+/*
 td {
   background:#FFFFFF;
   padding:20px;

@@ -1,6 +1,5 @@
 
 <form class="" action="/<%=@account_id%>/transactions" method="post">
-  <%= @account_id %>
   <label for="description_input">Description</label>
   <input type="text" name="name" value="" id="description_input">
   <br>
@@ -12,6 +11,7 @@
  <label for="date_field">Transaction date</label>
  <input id="transaction_date" name="transaction_date" type="date">
 
+</br>
  <label for="merchant_select">Merchant</label>
  <select class="" name="merchant_id" id="merchant_select">
    <% @merchants.each do |merchant| %>
