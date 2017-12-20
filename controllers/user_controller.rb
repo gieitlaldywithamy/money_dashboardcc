@@ -21,8 +21,14 @@ get('/users/new') do
   erb(:'users/new')
 end
 
-get('/users/show') do
+get('/users/:id/show') do
+  @user = User.find(params[:id])
   erb(:'users/show')
+end
+
+get('/users/:id/edit') do
+  @user = User.find(params[:id])
+  erb(:'users/edit')
 end
 
 post('/users') do

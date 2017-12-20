@@ -20,7 +20,7 @@
     </progress>
     <p><%= user.budget_percent.round() %>% spent</p>
   </td>
-  <td> <a href="/users/show">Details</a> </td>
+  <td> <a href="/users/<%=user.id%>/show">Details</a> </td>
 </tr>
     <% end %>
 
