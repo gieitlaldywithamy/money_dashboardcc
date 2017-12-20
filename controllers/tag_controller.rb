@@ -24,3 +24,8 @@ get('/tags/new') do
   @tags = Tag.all()
   erb(:'tags/new')
 end
+
+get('/tags/show_totals') do
+  @tags = Tag.all()
+  erb(:'tags/show_totals')
+end

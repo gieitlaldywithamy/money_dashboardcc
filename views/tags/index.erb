@@ -1,17 +1,9 @@
 
-<h1>Tags</h1>
-<a href="<%= erb(:'transactions/shared/table') %>"></a>
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Total Spent</th>
-  </tr>
+<h1>Categories</h1>
+<a href="/tags/show_totals">See how much is spent in each category</a>
+<ul>
   <% for tag in @tags %>
-  <tr>
-    <td><%= tag.name %></a></td>
-    <i class="fa fa-plane" aria-hidden="true"></i>
+  <li><%= tag.name %></li>
 
-    <td><%= Transaction.total_spent_by_tag(tag) %></td>
-
-  </tr>
   <% end %>
+</ul>

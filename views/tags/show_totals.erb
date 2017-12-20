@@ -1,0 +1,16 @@
+
+<h1>Tags</h1>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Total Spent</th>
+  </tr>
+  <% for tag in @tags %>
+  <tr>
+    <td><%= tag.name %></a></td>
+    <i class="fa fa-plane" aria-hidden="true"></i>
+
+    <td><%= Transaction.total_spent_by_tag(tag) %></td>
+
+  </tr>
+  <% end %>
