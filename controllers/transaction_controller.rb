@@ -63,6 +63,7 @@ get('/:id/transactions/new') do
   @merchants = Merchant.all()
   @tags = Tag.all()
   @account_id = params[:id].to_i
+  @name = User.find(@account_id).name
   erb(:'transactions/new')
 end
 
