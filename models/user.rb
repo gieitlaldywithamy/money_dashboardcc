@@ -13,7 +13,6 @@ class User
   end
 
   def save()
-    binding.pry
     if @id
       update()
     else
@@ -24,10 +23,8 @@ class User
   def insert()
 
     sql = "INSERT INTO users (name, budget_limit) VALUES ($1, $2) RETURNING id;"
-    # how to find out a month from time_period_start
     values = [@name, @budget_limit]
     user = SqlRunner.run(sql, values)
-
     @id = user[0]['id'].to_i
   end
 
