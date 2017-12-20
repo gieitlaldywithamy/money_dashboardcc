@@ -10,6 +10,9 @@ require_relative('../models/tag.rb')
 require_relative('../models/merchant.rb')
 
 post('/:id/transactions/month_total') do
+  @month = params['month'].to_i
+  @account_id = params['id'].to_i
+  @monthly_spend = Transaction.sum_by_month_for_user(@month, @account_id)
   erb(:'transactions/shared/monthly_spend')
 end
 
