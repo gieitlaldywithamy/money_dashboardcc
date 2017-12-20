@@ -76,7 +76,12 @@ class User
     return SqlRunner.run(sql, values)[0].values().first()
   end
 
-
+  def transactions_for_month(month)
+    sql =  "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
+    values = [month, @id]
+    total_spent = SqlRunner.run_sql_and_map(sql, Transaction, values)
+    return total_spent
+  end
 
   def User.find(id)
     sql = "SELECT * FROM users WHERE id = $1"

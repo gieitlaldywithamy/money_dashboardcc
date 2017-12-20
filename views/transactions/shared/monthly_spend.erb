@@ -2,6 +2,9 @@
 <p><%=params%>
   <% if @monthly_spend %>
   Your total spend in <%=Date::MONTHNAMES[@month.to_i]%> is £ <%= @monthly_spend  %>
+
+
+  <%= erb(:'transactions/shared/table') %>
   <% else %>
   You spent nothing in <%=Date::MONTHNAMES[@month.to_i]%>
   <% end %>

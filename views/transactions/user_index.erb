@@ -1,54 +1,42 @@
-<div class="budget_warning">
-  <h4>You have spent and have left.</h4>
-</div>
-<!-- 
-<form action="/<%=transaction.account_id%>/transactions/month_total" method="get">
-      <label for="merchant_select">Check monthly spend</label>
-      <select selected = "<%=month_id%>"  name="merchant_id" id="merchant_select">
-        <% @merchants.each do |merchant| %>
 
-        <% if merchant.id == @transaction.merchant_id %>
-           <option value=<%= merchant.id %> selected><%= merchant.name %></option>
-         <% else %>
-           <option value=<%= merchant.id %>><%= merchant.name %></option>
-         <% end %>
-       <% end %>
+
+  <% if @account_id && @user.has_used_account()%>
+
+  <div class="budget_warning">
+    <h4>You have spent £<%= @user.spent() %> and have £<%= @user.budget_left %> left in your budget.</h4>
+  </div>
+
+  <% if @user.budget_left == 0 %>
+  <h4 id="overspent"> You have overspent </h4>
+  <% elsif @user.budget_percent() > 90%>
+  <h4 id="warning"> Tighten your purse strings a bit </h4>
+  <% end %>
+
+
+  <form action="/<%=@user.id%>/transactions/month_total" method="post">
+        <label for="monthly_spend">Check monthly spend for</label>
+        <select name="month" id="monthly_spend">
+          <% [*1..12].each do |month| %>
+            <option value="<%=month%>"><%=Date::MONTHNAMES[month]%></option>
+          <% end %>
+        </select>
       </select>
-    </select>
-</form> -->
+      <input type="submit" name="" value="Find out">
+  </form>
 
 
   <h2>
-        Your total spend in <%= Date.today.strftime("%B") %> is £<%= @dec_transactions %>
+    Your total spend in <%= Date.today.strftime("%B") %> is £<%= @monthly_spend  %>
       </br/></h2>
-      Year to date: £<%= @transactions_sum %>
-<%= Transaction.total_spent() %>
 
-<div class="table-title">
-<h3>All transactions</h3>
-</div>
-<table class="table-fill">
-  <thead>
-    <tr>
-      <th class="text-left">Description</th>
-      <th class="text-left">Amount</th>
-      <th class="text-left">Date</th>
-      <th class="text-left">Category</th>
-      <th class="text-left">Merchant</th>
-</tr>
-  </thead>
-  <tbody class="table-hover">
-    <% for transaction in @transactions %>
-    <tr>
-      <td class="text-left"> <%= transaction.account_name %></td>
-      <td class="text-left"> <%= transaction.transaction_date %></td>
-      <td class="text-left"> <%= transaction.name %></td>
-      <td class="text-left"> <%= transaction.value %></td>
+      <h2>You spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h2>
+      <h2> Your total spending is <%= @user.spent() %> </h2>
 
-      <td class="text-left"> <%= transaction.tag.name %></td>
-      <td class="text-left"> <%= transaction.merchant.name %></td>
-      <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>">Details</a> </td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<a href="/<%=@account_id%>/transactions/filter_tag">Order By Tag</a>
+
+<%= erb(:'transactions/shared/table') %>
+
+<% else %>
+<h2> You need to enter some of your spending. </h2>
+<a href="/<%=@account_id%>/transactions/new">Add entry</a>
+<% end %>

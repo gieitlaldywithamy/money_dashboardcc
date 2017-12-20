@@ -8,11 +8,14 @@ require_relative('tag_controller.rb')
 require_relative('../models/transaction.rb')
 require_relative('../models/tag.rb')
 require_relative('../models/merchant.rb')
+require_relative('../models/user.rb')
 
 post('/:id/transactions/month_total') do
   @month = params['month'].to_i
   @account_id = params['id'].to_i
+  @user = User.find(@account_id)
   @monthly_spend = Transaction.sum_by_month_for_user(@month, @account_id)
+  @transactions = @user.transactions_for_month(@month)
   erb(:'transactions/shared/monthly_spend')
 end
 
@@ -26,11 +29,10 @@ get('/:id/transactions/filter_tag') do
   @account_id = params[:id].to_i
   @user = User.find(params[:id].to_i)
   @transactions = Transaction.user_all_tag_sort(@account_id)
-  p params,
   @name = User.find(params[:id].to_i).name
   @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
   # @tag = Tag.all()[1]
-  erb(:'transactions/index')
+  erb(:'transactions/user_index')
 end
 
 get('/:id/transactions') do
@@ -43,7 +45,7 @@ get('/:id/transactions') do
   @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
 
   # @tag = Tag.all()[1]
-  erb(:'transactions/index')
+  erb(:'transactions/user_index')
 end
 
 post('/:id/transactions') do
