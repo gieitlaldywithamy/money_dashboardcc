@@ -35,6 +35,7 @@ get('/:id/transactions') do
   p params,
   @name = User.find(params[:id].to_i).name
   @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
+
   # @tag = Tag.all()[1]
   erb(:'transactions/index')
 end

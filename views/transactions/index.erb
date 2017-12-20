@@ -1,12 +1,35 @@
 
-  <h2>
+  <% if @account_id && @user.has_used_account()%>
 
-        Your total spend in <%= Date.today.strftime("%B") %> is £<%= @monthly_spend  %>
+  <div class="budget_warning">
+    <h4>You have spent £<%= @user.spent() %> and have £<%= @user.budget_left %> left in your budget.</h4>
+  </div>
+
+  <% if @user.budget_left == 0 %>
+  <h4 id="overspent"> You have overspent </h4>
+  <% elsif @user.budget_percent() > 90%>
+  <h4 id="warning"> Tighten your purse strings a bit </h4>
+  <% end %>
+
+  <form action="/shared/monthly_spend" method="get">
+      <input type="radio" name="<%=@month_spend%>" value="answer1" checked> answer1<br>
+      <input type="submit">
+  </form>
+
+
+  <h2>
+    Your total spend in <%= Date.today.strftime("%B") %> is £<%= @monthly_spend  %>
       </br/></h2>
+    <select class="" name="">
+
+    </select>
       <h2>You spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h2>
+      <h2> Your total spending is <%= @user.spent() %> </h2>
 <%= Transaction.total_spent() %>
 
 <a href="/<%=@account_id%>/transactions/filter_tag">Order By Tag</a>
+<a href="/<%=@account_id%>/transactions/filter_tag">Order By Tag</a>
+
 <%= erb(:'transactions/shared/table') %>
 
 <div class="table-title">
@@ -15,3 +38,7 @@
 
 
 <%= Transaction.transaction_by_month(12) %>
+<% else %>
+<h2> You need to enter some of your spending. </h2>
+<a href="/<%=@account_id%>/transactions/new">Add entry</a>
+<% end %>

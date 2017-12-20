@@ -43,6 +43,9 @@ class User
     SqlRunner.run(sql, values)
   end
 
+  def has_used_account()
+    return Transaction.user_all(@id).count() > 0
+  end
 
   # def how_many_days()
   #   sql = "SELECT time_period_end - time_period_start FROM users WHERE id=$1"
@@ -54,8 +57,16 @@ class User
     return (spent().to_f/@budget_limit)*100
   end
 
+  def budget_left()
+    if over_budget()
+      return 0
+    else
+      return @budget_limit - spent().to_f
+    end
+  end
+
   def over_budget()
-    p spent(), @budget_limit
+
      return spent().to_f > @budget_limit
   end
 

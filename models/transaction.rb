@@ -123,10 +123,16 @@ class Transaction
   end
 
   def Transaction.total_spent_user_tag(user)
-    sql = "select tag_id, SUM(value) FROM transactions WHERE account_id = $1 GROUP BY tag_id ORDER BY tag_id";
+    sql = "select tag_id, SUM(value) FROM transactions WHERE account_id = $1 GROUP BY tag_id ORDER BY SUM(value) desc";
     values = [user.id]
     highest_tag = SqlRunner.run(sql, values)
-    return highest_tag[0]['tag_id']
+    # would like to change this
+  
+    if highest_tag.values.length > 0
+      return highest_tag[0]['tag_id']
+    else
+      return 0
+    end
   end
 
   def Transaction.total_spent_by_tag(tag)

@@ -21,13 +21,6 @@ get('/users/new') do
   erb(:'users/new')
 end
 
-get('/:id/users/show') do
-  @user = User.find(params[:id])
-  @account_id = @user.id
-  @name = @user.name
-  erb(:'users/show')
-end
-
 get('/:id/users/edit') do
   @user = User.find(params[:id])
   @account_id = @user.id
@@ -35,8 +28,25 @@ get('/:id/users/edit') do
   erb(:'users/edit')
 end
 
+get('/:id/users/show') do
+  @user = User.find(params[:id])
+  @account_id = @user.id
+  @name = @user.name
+  erb(:'users/show')
+end
+
+
+
 post('/users') do
    p params
+    @user = User.new(params)
+    p "id", params['id']
+    @user.save()
+    redirect to "/users"
+end
+
+post('/users/:id') do
+
     @user = User.new(params)
     p "id", params['id']
     @user.save()
