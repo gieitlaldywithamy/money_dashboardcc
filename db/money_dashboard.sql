@@ -26,6 +26,7 @@ CREATE TABLE transactions (
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
   value NUMERIC(8,2) NOT NULL,
+  luxury BOOLEAN DEFAULT FALSE, 
   transaction_date DATE NOT NULL DEFAULT CURRENT_DATE,
   merchant_id INT4 REFERENCES merchants(id) ON DELETE CASCADE,
   tag_id INT4 REFERENCES tags(id) ON DELETE CASCADE,

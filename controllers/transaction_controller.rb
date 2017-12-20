@@ -9,6 +9,9 @@ require_relative('../models/transaction.rb')
 require_relative('../models/tag.rb')
 require_relative('../models/merchant.rb')
 
+post('/:id/transactions/month_total') do
+  erb(:'transactions/shared/monthly_spend')
+end
 
 get ('/transactions') do
   @transactions = Transaction.all()
@@ -48,6 +51,8 @@ post('/:id/transactions') do
 
   redirect to "/#{@transaction.account_id}/transactions"
 end
+
+
 
 get('/:id/transactions/new') do
   @merchants = Merchant.all()
