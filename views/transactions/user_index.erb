@@ -2,9 +2,19 @@
   <h4>You have spent and have left.</h4>
 </div>
 
-<form action="<%= erb :monthly_spend %>" method="get">
-    <input type="radio" name="<%=@month_spend%>" value="answer1" checked> answer1<br>
-    <input type="submit">
+<form action="/<%=transaction.account_id%>/transactions/month_total" method="get">
+      <label for="merchant_select">Check monthly spend</label>
+      <select selected = "<%=month_id%>"  name="merchant_id" id="merchant_select">
+        <% @merchants.each do |merchant| %>
+
+        <% if merchant.id == @transaction.merchant_id %>
+           <option value=<%= merchant.id %> selected><%= merchant.name %></option>
+         <% else %>
+           <option value=<%= merchant.id %>><%= merchant.name %></option>
+         <% end %>
+       <% end %>
+      </select>
+    </select>
 </form>
 
 

@@ -11,9 +11,16 @@
   <h4 id="warning"> Tighten your purse strings a bit </h4>
   <% end %>
 
-  <form action="/shared/monthly_spend" method="get">
-      <input type="radio" name="<%=@month_spend%>" value="answer1" checked> answer1<br>
-      <input type="submit">
+
+  <form action="/<%=@user.id%>/transactions/month_total" method="get">
+        <label for="merchant_select">Check monthly spend for</label>
+        <select selected = "<%Date.today%>"  name="merchant_id" id="merchant_select">
+          <% [*1..12].each do |month| %>
+            <option value="<%month%>"><%=Date::MONTHNAMES[month]%></option>
+          <% end %>
+        </select>
+      </select>
+      <input type="submit" name="" value="Find out">
   </form>
 
 
