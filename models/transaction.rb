@@ -77,6 +77,12 @@ class Transaction
     return transactions
   end
 
+  def Transaction.user_all_tag_sort(id)
+    sql = "SELECT * FROM transactions WHERE account_id = $1 ORDER BY tag_id;"
+    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
+    return transactions
+  end
+
   def Transaction.transaction_by_month(month)
     sql = "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1"
     values = [month]
@@ -114,6 +120,13 @@ class Transaction
     sql = "SELECT SUM(value) FROM transactions;"
     total_spent = SqlRunner.run(sql)[0].values().first()
     return total_spent
+  end
+
+  def Transaction.total_spent_user_tag(user)
+    sql = "select tag_id, SUM(value) FROM transactions WHERE account_id = $1 GROUP BY tag_id ORDER BY tag_id";
+    values = [user.id]
+    highest_tag = SqlRunner.run(sql, values)
+    return highest_tag[0]['tag_id']
   end
 
   def Transaction.total_spent_by_tag(tag)

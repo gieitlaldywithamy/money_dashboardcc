@@ -14,14 +14,29 @@ get ('/transactions') do
   @transactions = Transaction.all()
   erb(:'transactions/index')
 end
+
+get('/:id/transactions/filter_tag') do
+
+  @account_id = params[:id].to_i
+  @user = User.find(params[:id].to_i)
+  @transactions = Transaction.user_all_tag_sort(@account_id)
+  p params,
+  @name = User.find(params[:id].to_i).name
+  @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
+  # @tag = Tag.all()[1]
+  erb(:'transactions/index')
+end
+
 get('/:id/transactions') do
    # @user = User.find(id)
   @transactions = Transaction.user_all(params[:id].to_i)
   @account_id = params[:id].to_i
+  @user = User.find(params[:id].to_i)
   p params,
   @name = User.find(params[:id].to_i).name
+  @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
   # @tag = Tag.all()[1]
-  erb(:'transactions/user_index')
+  erb(:'transactions/index')
 end
 
 post('/:id/transactions') do
@@ -29,6 +44,7 @@ post('/:id/transactions') do
   @transaction = Transaction.new(params)
   @transaction.save()
   @account_id = params['account_id']
+
   redirect to "/#{@transaction.account_id}/transactions"
 end
 

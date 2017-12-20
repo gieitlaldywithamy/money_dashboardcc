@@ -1,0 +1,35 @@
+
+  <h2>
+        Your total spend in <%= Date.today.strftime("%B") %> is £<%= @dec_transactions %>
+      </br/></h2>
+      Year to date: £<%= @transactions_sum %>
+<%= Transaction.total_spent() %>
+
+<div class="table-title">
+<h3>All transactions</h3>
+</div>
+<table class="table-fill">
+  <thead>
+    <tr>
+      <th class="text-left">Description</th>
+      <th class="text-left">Amount</th>
+      <th class="text-left">Date</th>
+      <th class="text-left">Category</th>
+      <th class="text-left">Merchant</th>
+</tr>
+  </thead>
+  <tbody class="table-hover">
+    <% for transaction in @transactions %>
+    <tr>
+      <td class="text-left"> <%= transaction.account_name %></td>
+      <td class="text-left"> <%= transaction.transaction_date %></td>
+      <td class="text-left"> <%= transaction.name %></td>
+      <td class="text-left"> <%= transaction.value %></td>
+
+      <td class="text-left"> <%= transaction.tag.name %></td>
+      <td class="text-left"> <%= transaction.merchant.name %></td>
+      <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>">Details</a> </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

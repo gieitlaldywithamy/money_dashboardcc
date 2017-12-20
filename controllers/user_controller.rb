@@ -23,11 +23,15 @@ end
 
 get('/:id/users/show') do
   @user = User.find(params[:id])
+  @account_id = @user.id
+  @name = @user.name
   erb(:'users/show')
 end
 
 get('/:id/users/edit') do
   @user = User.find(params[:id])
+  @account_id = @user.id
+  @name = @user.name
   erb(:'users/edit')
 end
 
