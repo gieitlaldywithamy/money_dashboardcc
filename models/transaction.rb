@@ -56,12 +56,22 @@ class Transaction
     account = User.find(@account_id)
   end
 
+  def account_name()
+    return account().name
+  end
+
   def Transaction.delete_all()
     sql = "DELETE FROM transactions;"
     SqlRunner.run(sql)
   end
 
-  def Transaction.all(id)
+  def Transaction.all()
+    sql = "SELECT * FROM transactions"
+    transactions = SqlRunner.run_sql_and_map(sql, Transaction)
+    return transactions
+  end
+
+  def Transaction.user_all(id)
     sql = "SELECT * FROM transactions WHERE account_id = $1;"
     transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
     return transactions

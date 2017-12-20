@@ -1,9 +1,9 @@
-<a href="/users/<%=@user.id%>/edit">Edit</a>
+<a href="/<%=@user.id%>/users/edit">Edit</a>
 
 
 <p><%= @user.name %>
   <%= @user.budget_limit %>
 
-<form method="post" action="/<%=@user_id%>/users/delete">
+<form method="post" action="/<%=@user.id%>/users/delete">
   <input type="submit" value="Delete"/>
 </form>

@@ -18,9 +18,11 @@
   <tbody class="table-hover">
     <% for transaction in @transactions %>
     <tr>
+      <td class="text-left"> <%= transaction.account_name %></td>
+      <td class="text-left"> <%= transaction.transaction_date %></td>
       <td class="text-left"> <%= transaction.name %></td>
       <td class="text-left"> <%= transaction.value %></td>
-      <td class="text-left"> <%= transaction.transaction_date %></td>
+
       <td class="text-left"> <%= transaction.tag.name %></td>
       <td class="text-left"> <%= transaction.merchant.name %></td>
       <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>">Details</a> </td>

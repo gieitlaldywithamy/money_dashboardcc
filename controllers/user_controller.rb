@@ -21,12 +21,12 @@ get('/users/new') do
   erb(:'users/new')
 end
 
-get('/users/:id/show') do
+get('/:id/users/show') do
   @user = User.find(params[:id])
   erb(:'users/show')
 end
 
-get('/users/:id/edit') do
+get('/:id/users/edit') do
   @user = User.find(params[:id])
   erb(:'users/edit')
 end
@@ -37,5 +37,10 @@ post('/users') do
     p "id", params['id']
     @user.save()
     redirect to "/users"
+end
 
+post ('/:id/users/delete') do
+  @user = User.find(params[:id].to_i)
+  @user.delete
+  redirect to "/users"
 end

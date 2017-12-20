@@ -37,6 +37,12 @@ class User
     SqlRunner.run(sql, values)
   end
 
+  def delete()
+    sql = "DELETE FROM users WHERE id = $1"
+    values = [@id]
+    SqlRunner.run(sql, values)
+  end
+
 
   # def how_many_days()
   #   sql = "SELECT time_period_end - time_period_start FROM users WHERE id=$1"

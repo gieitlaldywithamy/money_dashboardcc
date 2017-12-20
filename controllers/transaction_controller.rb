@@ -9,14 +9,19 @@ require_relative('../models/transaction.rb')
 require_relative('../models/tag.rb')
 require_relative('../models/merchant.rb')
 
+
+get ('/transactions') do
+  @transactions = Transaction.all()
+  erb(:'transactions/index')
+end
 get('/:id/transactions') do
    # @user = User.find(id)
-  @transactions = Transaction.all(params[:id].to_i)
+  @transactions = Transaction.user_all(params[:id].to_i)
   @account_id = params[:id].to_i
   p params,
   @name = User.find(params[:id].to_i).name
   # @tag = Tag.all()[1]
-  erb(:'transactions/index')
+  erb(:'transactions/user_index')
 end
 
 post('/:id/transactions') do

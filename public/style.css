@@ -3,6 +3,7 @@
   width: 100%;
 }
 
+
 /*** Flexbox layout from online **/
 
 * {
@@ -15,7 +16,7 @@
     margin: 0;
   }
   .col-1 {
-    background: #D7E8D4;
+    background: #FFB6C1;
     flex: 1;
   }
   .col-2 {
