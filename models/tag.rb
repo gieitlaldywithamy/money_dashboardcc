@@ -44,10 +44,14 @@ class Tag
       merchants = SqlRunner.run_sql_and_map(sql, Tag)
   end
 
+  def Tag.get_name_by_id(id)
+    return (Tag.find(id)).name
+  end
+
   def Tag.most_spent_on()
-    sql = "SELECT tags.name, MAX(transactions.value)SELECT SUM(transactions.value)
-    FROM tags
-    INNER JOIN transactions on transaction.tag_id = tags.id"
+    sql = "select sum(value),tag_id from transactions GROUP BY tag_id ORDER BY sum desc"
+    result = SqlRunner.run(sql)[0]['tag_id']
+    return result.to_i
   end
 
   def Tag.total_spent_by_tag(tag)
