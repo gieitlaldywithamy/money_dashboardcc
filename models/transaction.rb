@@ -25,8 +25,8 @@ class Transaction
   end
 
   def insert()
-    sql = "INSERT INTO transactions (name, value, merchant_id, tag_id, account_id) VALUES ($1, $2, $3, $4, $5) RETURNING id;"
-    values = [@name, @value,@merchant_id, @tag_id, @account_id]
+    sql = "INSERT INTO transactions (name, value, transaction_date, merchant_id, tag_id, account_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;"
+    values = [@name, @value, @transaction_date, @merchant_id, @tag_id, @account_id]
     # auto generating date make optional? how?
     transaction = SqlRunner.run(sql, values)
     @id = transaction[0]['id'].to_i()
@@ -127,7 +127,7 @@ class Transaction
     values = [user.id]
     highest_tag = SqlRunner.run(sql, values)
     # would like to change this
-  
+
     if highest_tag.values.length > 0
       return highest_tag[0]['tag_id']
     else

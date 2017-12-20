@@ -9,6 +9,9 @@
  <input type="number" name="value" step="any" min="0" value="" id="value_input">
  <br>
 
+ <label for="date_field">Transaction date</label>
+ <input id="transaction_date" name="transaction_date" type="date">
+
  <label for="merchant_select">Merchant</label>
  <select class="" name="merchant_id" id="merchant_select">
    <% @merchants.each do |merchant| %>
