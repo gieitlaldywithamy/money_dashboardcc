@@ -32,9 +32,9 @@ get('/users/:id/edit') do
 end
 
 post('/users') do
-
-
+   p params
     @user = User.new(params)
+    p "id", params['id']
     @user.save()
     redirect to "/users"
 

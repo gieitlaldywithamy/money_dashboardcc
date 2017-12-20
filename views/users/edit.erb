@@ -1,0 +1,15 @@
+
+
+  <form class="" action="/users" method="post">
+
+    <input id="hacking_form" name="id" type="hidden" value="<%=@user.id%>">
+    <label for="user_name">Name</label>
+    <input type="text" name="name" value="<%=@user.name%>" id="user_input">
+    <br>
+
+   <label for="budget_limit">What's your budget?</label>
+   <input type="number" name="budget_limit" step="any" min="0" value="<%=@user.budget_limit%>" id="value_input">
+   <br>
+
+    <input type="submit" name="" value="Save">
+  </form>

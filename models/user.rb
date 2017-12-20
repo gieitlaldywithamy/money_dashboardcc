@@ -12,13 +12,16 @@ class User
     # @time_period_end = options['time_period_end']
   end
 
-  # def santise_months(begin_month, end_month)
-  #   begin_month = begin_month.split('-')
-  #   end_month = end_month.split('-')
-  #
-  # end
-
   def save()
+    binding.pry
+    if @id
+      update()
+    else
+      insert()
+    end
+  end
+
+  def insert()
 
     sql = "INSERT INTO users (name, budget_limit) VALUES ($1, $2) RETURNING id;"
     # how to find out a month from time_period_start
@@ -29,7 +32,7 @@ class User
   end
 
   def update()
-    sql = "UPDATE users SET (name, budget_limit) = ($1, $2, $3, $4) WHERE id=$5;"
+    sql = "UPDATE users SET (name, budget_limit) = ($1, $2) WHERE id=$3;"
     values = [@name, @budget_limit, @id]
     SqlRunner.run(sql, values)
   end
