@@ -1,10 +1,6 @@
 
 
-<h3>See transactions for...</h3>
-<% for user in @users %>
-<%= user.name %>
-<%= user.budget_limit %>
-<% end %>
+<h3>Users</h3>
 
 
 <div>
@@ -12,16 +8,25 @@
     <tr>
       <th>Name</th>
       <th>Budget</th>
+      <th> <a href="/users/new">Add row</a>
     </tr>
     <% for user in @users %>
     <tr>
-    <td><%= user.name %></td>
-    <td>
+
+    <td> <a href="/<%=user.id%>/transactions"><%=user.name%></a></td>
+    <td style="inline">
     <progress class="budget" max="100" value="<%= user.budget_percent %>">
       <strong><%= user.budget_percent %></strong>
     </progress>
+    <p><%= user.budget_percent.round() %>% spent</p>
   </td>
+  <td> <a href="/users/show"></a> </td>
 </tr>
     <% end %>
 
   </table>
+<a href="/users/new" class="button">Create new users</a>
+  <h2>
+        Your total spend in <%= Date.today.strftime("%B") %> is £<%= @dec_transactions %>
+      </br/></h2>
+      Year to date: £<%= @transactions_sum %>

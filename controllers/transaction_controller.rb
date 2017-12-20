@@ -12,7 +12,7 @@ require_relative('../models/merchant.rb')
 get('/:id/transactions') do
    # @user = User.find(id)
   @transactions = Transaction.all(params[:id].to_i)
-
+  @account_id = params[:id].to_i
   p params,
   @name = User.find(params[:id].to_i).name
   # @tag = Tag.all()[1]

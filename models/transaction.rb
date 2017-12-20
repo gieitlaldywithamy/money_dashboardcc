@@ -73,7 +73,12 @@ class Transaction
     return SqlRunner.run_sql_and_map(sql, Transaction, [month])
   end
 
-
+  def Transaction.sum_by_month_for_user(month, user_id)
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
+    values = [month, user_id]
+    total_spent = SqlRunner.run(sql, values)[0].values().first()
+    return total_spent
+  end
 
 
   # def Transaction.find_by_id(user_id, transaction_id)

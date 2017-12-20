@@ -10,7 +10,8 @@ CREATE TABLE merchants (
 
 CREATE TABLE tags (
   id SERIAL4 PRIMARY KEY,
-  name VARCHAR(255) UNIQUE
+  name VARCHAR(255) UNIQUE,
+  luxury boolean DEFAULT false,
 );
 
 CREATE TABLE users (

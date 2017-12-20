@@ -4,11 +4,76 @@
     <meta charset="utf-8">
     <title>Frugal</title>
     <link rel="stylesheet" href="/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Coustard" rel="stylesheet">
   </head>
   <body>
+    <nav class="col-1">
+        <% if @account_id %>
+        <ul>
+          <li>
+            <img src="/piggy-bank.svg" id="piggybank">
+              <div class="centered">
+                <%= @name? @name : "Nobody here"%>
+              </div>
+          </li>
+        <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
+
+        <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
+
+        <% else %>
+            <li><a href="/merchants">Merchants</a></li>
+            <li><a href="/tags">Categories</a></li>
+        <% end %>
+      </ul>
+      </nav>
+
+
+    <div class="col-2">
+  <header>Frugal</header>
+  <main class="content">
+  <article><%= yield %></article>
+  </main>
+</body>
+<!-- </div>
+      <div id="left" class="column">
+          <div class="top-left">
+            <img src="/piggy-bank.svg" id="piggybank">
+              <div class="centered">
+                <%= @name? @name : "Nobody here"%>
+              </div>
+          </div>
+          </div>
+          <div class="bottom">
+            <% if @account_id %>
+            <ul>
+            <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
+
+            <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
+
+            <% else %>
+                <li><a href="/merchants">Merchants</a></li>
+                <li><a href="/tags">Categories</a></li>
+            <% end %>
+          </ul>
+          </div>
+      </div>
+      <div id="right" class="column">
+          <div class="top-right">
+            <h1>Frugal</h1>
+          </div>
+          <div class="bottom">
+            <main>
+          <%= yield %>
+        </main>
+          </div>
+      </div>
+  </body> -->
+  <!-- <body>
     <div id = "container">
     <header>
-        <h1>Frugal</h1>
+        <a href="/">
+          <h1>Frugal</h1>
+        </a>
     </header>
     <div id = "contents">
       <nav>
@@ -25,21 +90,15 @@
 
               </div>
             </div>
+          <% if @account_id %>
+          <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
 
+          <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
 
-
-
-
-
-          <%= @name? 'present' : 'coleção' %>
-
-          <li><a href="/transactions">See all transactions</a></li>
-
-          <li><a href="/transactions/new">Add entry</a></li>
-          <li><a href="/merchants">List where I spend my money</a></li>
-          <li><a href="/merchants/new">Add new merchant</a></li>
-          <li><a href="/tags">See all tags</a></li>
-          <li><a href="/tags/new">Add new tag</a></li>
+          <% else %>
+              <li><a href="/merchants">Merchants</a></li>
+              <li><a href="/tags">Categories</a></li>
+          <% end %>
         </ul>
       </nav>
       <main>
@@ -47,5 +106,5 @@
   </main>
   </div>
   </div>
-  </body>
+  </body> -->
 </html>
