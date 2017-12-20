@@ -21,11 +21,15 @@ get('/users/new') do
   erb(:'users/new')
 end
 
+get('/users/show') do
+  erb(:'users/show')
+end
+
 post('/users') do
 
 
     @user = User.new(params)
     @user.save()
     redirect to "/users"
-  
+
 end

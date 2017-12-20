@@ -8,7 +8,7 @@
     <tr>
       <th>Name</th>
       <th>Budget</th>
-      <th> <a href="/users/new">Add row</a>
+      <th> <a href="/users/new">New user</a>
     </tr>
     <% for user in @users %>
     <tr>
@@ -20,7 +20,7 @@
     </progress>
     <p><%= user.budget_percent.round() %>% spent</p>
   </td>
-  <td> <a href="/users/show"></a> </td>
+  <td> <a href="/users/show">Details</a> </td>
 </tr>
     <% end %>
 
