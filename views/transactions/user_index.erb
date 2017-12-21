@@ -1,17 +1,21 @@
 
 
   <% if @account_id && @user.has_used_account()%>
-
+  <h4>You earn £<%=@user.annual_income%> a year thus your monthly budget is <b> £<%= @user.monthly_budget_limit.round(2) %></b></h4>
   <div class="budget_warning">
-    <h4>You have spent £<%= @user.spent() %> and have £<%= @user.budget_left %> left in your budget.</h4>
+    <h4><%=Date.today.strftime("%B")%>: You have spent £<%= @user.spent_on_current_month() %> and have £<%= @user.budget_left.round(2) %> left in your budget.</h4>
   </div>
 
   <% if @user.budget_left == 0 %>
   <h4 id="overspent"> You have overspent </h4>
-  <% elsif @user.budget_percent() > 90%>
+  <% elsif @user.budget_percent() > 75 %>
   <h4 id="warning"> Tighten your purse strings a bit </h4>
   <% end %>
 
+
+
+        <h4>You have spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h4>
+        <h4> Your total spending is <%= @user.spent_yearly() %> </h4>
 
   <form action="/<%=@user.id%>/transactions/month_total" method="post">
         <label for="monthly_spend">Check monthly spend for</label>
@@ -24,13 +28,10 @@
       <input type="submit" name="" value="Find out">
   </form>
 
+  <% if @show_month %>
+  <%= erb(:'transactions/shared/monthly_spend') %>
+  <% end %>
 
-  <h4>
-    Your total spend in <%= Date.today.strftime("%B") %> is £<%= @monthly_spend  %>
-  </br/></h4>
-
-      <h4>You spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h4>
-      <h4> Your total spending is <%= @user.spent() %> </h4>
 
 <a href="/<%=@account_id%>/transactions/filter_tag" style="
 text-decoration: none">Order By Tag</a>

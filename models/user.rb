@@ -2,14 +2,13 @@ require('./db/sql_runner')
 
 class User
 
-  attr_reader :id, :name, :budget_limit
+  attr_reader :id, :name, :annual_income, :monthly_budget_limit
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
-    @budget_limit = options['budget_limit'].to_f
-    # @time_period_start = options['time_period_start']
-    # @time_period_end = options['time_period_end']
+    @annual_income = options['annual_income'].to_f
+    @monthly_budget_limit = set_budget()
   end
 
   def save()
@@ -21,16 +20,15 @@ class User
   end
 
   def insert()
-
-    sql = "INSERT INTO users (name, budget_limit) VALUES ($1, $2) RETURNING id;"
-    values = [@name, @budget_limit]
+    sql = "INSERT INTO users (name, annual_income) VALUES ($1, $2) RETURNING id;"
+    values = [@name, @annual_income]
     user = SqlRunner.run(sql, values)
     @id = user[0]['id'].to_i
   end
 
   def update()
-    sql = "UPDATE users SET (name, budget_limit) = ($1, $2) WHERE id=$3;"
-    values = [@name, @budget_limit, @id]
+    sql = "UPDATE users SET (name, annual_income) = ($1, $2) WHERE id=$3;"
+    values = [@name, @annual_income, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -40,43 +38,55 @@ class User
     SqlRunner.run(sql, values)
   end
 
+  def transactions()
+    sql = "SELECT * FROM transactions WHERE account_id = $1;"
+    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
+    return transactions
+  end
   def has_used_account()
     return Transaction.user_all(@id).count() > 0
   end
 
-  # def how_many_days()
-  #   sql = "SELECT time_period_end - time_period_start FROM users WHERE id=$1"
-  #   return SqlRunner.run(sql, [@id]).values[0][0].to_i
-  # end
+
+
+  def change_income(new_income)
+    @annual_income = new_income
+  end
 
   def budget_percent()
-    p spent(), @budget_limit, " percent wise"
-    return (spent().to_f/@budget_limit)*100
+    return (spent_on_current_month().to_f/@monthly_budget_limit)*100
+  end
+
+  def spent_yearly()
+    sql = "SELECT SUM(value) FROM transactions WHERE account_id = $1"
+    values = [@id]
+    total_spent = SqlRunner.run(sql, values)[0].values().first()
+    return total_spent
   end
 
   def budget_left()
     if over_budget()
       return 0
     else
-      return @budget_limit - spent().to_f
+      return @monthly_budget_limit - spent_on_current_month().to_f
     end
   end
 
   def over_budget()
-
-     return spent().to_f > @budget_limit
+     return spent_on_current_month().to_f > @monthly_budget_limit
   end
 
-  def spent()
-    sql = "SELECT SUM(value) FROM transactions WHERE account_id = $1;"
-    values = [@id]
-    return SqlRunner.run(sql, values)[0].values().first()
-  end
-
-  def transactions_for_month(month)
-    sql =  "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
+  def spent_on_month(month)
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
     values = [month, @id]
-    total_spent = SqlRunner.run_sql_and_map(sql, Transaction, values)
+    total_spent = SqlRunner.run(sql, values)[0].values().first()
+    return total_spent
+  end
+
+  def spent_on_current_month()
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
+    values = [Date.today.month, @id]
+    total_spent = SqlRunner.run(sql, values)[0].values().first()
     return total_spent
   end
 
@@ -93,5 +103,16 @@ class User
   def User.delete_all()
     sql = "DELETE FROM users;"
     SqlRunner.run(sql)
+  end
+
+  def all_transactions()
+    sql = "SELECT * FROM transactions WHERE account_id = $1;"
+    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
+    return transactions
+  end
+
+  private
+  def set_budget()
+    return @annual_income/12
   end
 end

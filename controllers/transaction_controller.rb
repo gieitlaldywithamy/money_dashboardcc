@@ -16,8 +16,12 @@ post('/:id/transactions/month_total') do
   @account_id = params['id'].to_i
   @user = User.find(@account_id)
   @monthly_spend = Transaction.sum_by_month_for_user(@month, @account_id)
-  @transactions = @user.transactions_for_month(@month)
-  erb(:'transactions/shared/monthly_spend')
+  @monthly_transactions = Transaction.transaction_by_month(@month)
+  @transactions = @user.transactions()
+  @show_month = true
+  @name = @user.name
+  erb(:'transactions/user_index')
+
 end
 
 get ('/transactions') do
@@ -41,7 +45,7 @@ get('/:id/transactions') do
   @transactions = Transaction.user_all(params[:id].to_i)
   @account_id = params[:id].to_i
   @user = User.find(params[:id].to_i)
-  p params,
+  p params, "getting user trans"
   @name = User.find(params[:id].to_i).name
   @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
 
@@ -64,6 +68,7 @@ get('/:id/transactions/new') do
   @merchants = Merchant.all()
   @tags = Tag.all()
   @account_id = params[:id].to_i
+  @user = User.find(@account_id)
   @name = User.find(@account_id).name
   erb(:'transactions/new')
 end
@@ -87,10 +92,12 @@ end
 
 
 post ('/:account_id/transactions/:transaction_id') do # update
+
+  params['id'] = params.delete(:transaction_id)
   @transaction = Transaction.new(params)
-  p params[:id]
-  p @transaction
+  @params[:id]
   @transaction.save
+  p "redirected"
   redirect to "/#{@transaction.account_id}/transactions"
 end
 

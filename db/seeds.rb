@@ -9,9 +9,9 @@ Merchant.delete_all()
 Tag.delete_all()
 User.delete_all()
 
-user1 = User.new('name' => 'Amy','budget_limit' => 1800)
+user1 = User.new('name' => 'Amy','annual_income' => 18000)
 user1.save()
-user2 = User.new('name' => 'Eleanor','budget_limit' => 800)
+user2 = User.new('name' => 'Eleanor','annual_income' => 24000)
 user2.save()
 
 # Tags

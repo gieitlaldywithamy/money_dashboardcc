@@ -1,6 +1,8 @@
 
 <form class="" action="/<%=@account_id%>/transactions/<%=@transaction.id%>" method="post">
 
+  <input type="hidden" name="account_id" value="<%=@account_id%>" id="name_input">
+  <br>
   <label for="name_input">Name</label>
   <input type="text" name="name" value="<%= @transaction.name%>" id="name_input">
   <br>

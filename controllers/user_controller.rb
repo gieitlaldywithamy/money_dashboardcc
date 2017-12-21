@@ -39,13 +39,15 @@ end
 
 
 post('/users') do
-
-    if params["name"].nil? || params["budget"].nil?
+  p params
+    if params["name"].nil? || params["annual_income"].nil?
       params['error'] = "Try again! Need more information"
       redirect to '/users/new'
     else
       @user = User.new(params)
+      p "created new user"
       @user.save()
+      p "saved new user"
       redirect to "/users"
     end
 
@@ -53,7 +55,7 @@ post('/users') do
 end
 
 post('/users/:id') do
-  if params["name"].nil? || params["budget"].nil?
+  if params["name"].nil? || params["annual_income"].nil?
     params['error'] = "Some fields were empty!"
     @user = User.find(params[:id])
     @account_id = @user.id

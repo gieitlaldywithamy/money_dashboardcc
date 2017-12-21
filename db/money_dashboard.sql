@@ -17,7 +17,7 @@ CREATE TABLE tags (
 CREATE TABLE users (
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(255),
-  budget_limit NUMERIC(8,2) NOT NULL
+  annual_income NUMERIC(8,2) NOT NULL
   -- time_period_start DATE NOT NULL DEFAULT CURRENT_DATE,
   -- time_period_end DATE NOT NULL
 );

@@ -59,20 +59,7 @@ class Tag
     values = [tag.id]
 
     total_spent = SqlRunner.run(sql, values)[0]['sum']
-    if total_spent
-      return total_spent
-    else
-      return "0"
-    end
+    return total_spent || 0
   end
-  # def Tag.user_spent_most_on(user_id)
-  #   sql = "SELECT tags.name, MAX(transactions.value)SELECT SUM(transactions.value)
-  #   FROM tags
-  #   INNER JOIN transactions on transaction.tag_id = tags.id
-  #   WHERE transactions.account_id = $1"
-  #   return SqlRunner.run(sql, [user_id])
-  # end
-
-
 
 end

@@ -1,10 +1,41 @@
-<h1> HELLO </h1>
-<p><%=params%>
+
   <% if @monthly_spend %>
   Your total spend in <%=Date::MONTHNAMES[@month.to_i]%> is £ <%= @monthly_spend  %>
+  <% month_save = ((@user.monthly_budget_limit).to_f - @monthly_spend.to_f).round(2)  %>
+  <% if month_save == 0 %>
+  <p>You broke even </p>
+  <% elsif month_save <= 0 %>
+  <p> You overspent </P>
+  <% else %>
+  You managed to save £ <%= ((@user.monthly_budget_limit).to_f - @monthly_spend.to_f).round(2)  %>
+  <% end %>
+  <table class="table-fill">
+    <thead>
+      <tr>
+        <% if @account_name %><th class="text-left">User</th><%end%>
+        <th class="text-left">Date</th>
+        <th class="text-left">Description</th>
+        <th class="text-left">Amount</th>
+        <th class="text-left">Category</th>
+        <th class="text-left">Merchant</th>
+  </tr>
+    </thead>
+    <tbody class="table-hover">
+      <% for transaction in @monthly_transactions %>
+      <tr>
+        <% if @account_name %><td class="text-left"> <%= transaction.account_name%></td><%end%>
+        <td class="text-left"> <%= DateFormatter.us_to_uk(transaction.transaction_date)%></td>
+        <td class="text-left"> <%= transaction.name %></td>
+        <td class="text-left"> <%= transaction.value %></td>
 
-
-  <%= erb(:'transactions/shared/table') %>
+        <td class="text-left"> <%= transaction.tag.name %></td>
+        <td class="text-left"> <%= transaction.merchant.name %></td>
+        <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>" style="
+  text-decoration: none">Details</a> </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
   <% else %>
   You spent nothing in <%=Date::MONTHNAMES[@month.to_i]%>
   <% end %>
