@@ -7,40 +7,16 @@
     <link href="https://fonts.googleapis.com/css?family=Barlow|Fjalla+One" rel="stylesheet">
   </head>
   <body>
-    <nav class="col-1">
-      <img src="/piggy-bank.svg" id="piggybank">
-      <ul>
-        <% if @account_id %>
-          <li class="centered">
-            <% if @name %>
-              <%= @name %>
-            <% else %>
-              <a href="/">Login</a>
-              <% end %>
-          </li>
-          <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
-          <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
-          <li><a href="/merchants">Merchants</a></li>
-          <li><a href="/tags">Categories</a></li>
-          <li><a href="/<%=@account_id%>/users/show">Account settings</a> </li>
-        <% else %>
-          <li> <a href="/">Login</a> </li>
-          <li><a href="/transactions">All transactions</a></li>
-          <li><a href="/merchants">Merchants</a></li>
-          <li><a href="/tags">Categories</a></li>
-        <% end %>
-      </ul>
-    </nav>
-
-
+    <%= erb(:'partials/nav') %>
     <div class="col-2">
-  <header>
-  <% if @name %>
-  <%= @name %>'s
-  <% end %>
-  Piggybank</header>
-  <main class="content">
-  <article><%= yield %></article>
-  </main>
-</body>
+      <header>
+        <% if @name %> <%= @name %>'s <% end %>
+        Piggybank
+      </header>
+      <main class="content">
+        <article>
+          <%= yield %>
+        </article>
+      </main>
+    </body>
 </html>
