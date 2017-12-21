@@ -9,6 +9,7 @@ require_relative('../models/transaction.rb')
 require_relative('../models/tag.rb')
 require_relative('../models/merchant.rb')
 require_relative('../models/user.rb')
+require_relative('../models/date_formatter.rb')
 
 post('/:id/transactions/month_total') do
   @month = params['month'].to_i

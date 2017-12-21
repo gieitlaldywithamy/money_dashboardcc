@@ -135,17 +135,14 @@ class Transaction
     end
   end
 
-  def Transaction.total_spent_by_tag(tag)
-    sql = "SELECT SUM(value) FROM transactions WHERE tag_id = $1"
-    values = [tag.id]
-
-    total_spent = SqlRunner.run(sql, values)[0]['sum']
-    if total_spent
-      return total_spent
-    else
-      return "0"
-    end
-  end
+  # def Transaction.find_multiple_by_month_year(date1, date2)
+  #     sql = "select * from transactions where
+  #     transaction_date >= $1 and transaction_date <= $2;"
+  #     hashes = SqlRunner.run(sql, [date1, date2])
+  #     result_final = hashes.map {
+  #       |transaction| Transaction.new(transaction) }
+  #     return result_final
+  #     end
 
 
 

@@ -25,12 +25,12 @@
   </form>
 
 
-  <h2>
+  <h4>
     Your total spend in <%= Date.today.strftime("%B") %> is £<%= @monthly_spend  %>
-      </br/></h2>
+  </br/></h4>
 
-      <h2>You spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h2>
-      <h2> Your total spending is <%= @user.spent() %> </h2>
+      <h4>You spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h4>
+      <h4> Your total spending is <%= @user.spent() %> </h4>
 
 <a href="/<%=@account_id%>/transactions/filter_tag">Order By Tag</a>
 

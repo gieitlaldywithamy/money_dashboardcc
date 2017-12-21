@@ -2,38 +2,35 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Frugal</title>
+    <title>Piggybank</title>
     <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css?family=Barlow|Fjalla+One" rel="stylesheet">
   </head>
   <body>
     <nav class="col-1">
       <img src="/piggy-bank.svg" id="piggybank">
-
-        <ul>
-          <% if @account_id %>
-          <li>
-
-              <div class="centered">
-                <%= @name? @name : "Nobody here"%>
-              </div>
-          </li>
-
-        <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
-
-        <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
-
-            <li><a href="/merchants">Merchants</a></li>
-            <li><a href="/tags">Categories</a></li>
-            <li><a href="/<%=@account_id%>/users/show">Account settings</a> </li>
+      <ul>
+        <% if @account_id %>
+          <li class="centered">
+            <% if @name %>
+              <%= @name %>
             <% else %>
-            <li> <a href="/">Login</a> </li>
-            <li><a href="/transactions">All transactions</a></li>
-            <li><a href="/merchants">Merchants</a></li>
-            <li><a href="/tags">Categories</a></li>
-            <% end %>
+              <a href="/">Login</a>
+              <% end %>
+          </li>
+          <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
+          <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
+          <li><a href="/merchants">Merchants</a></li>
+          <li><a href="/tags">Categories</a></li>
+          <li><a href="/<%=@account_id%>/users/show">Account settings</a> </li>
+        <% else %>
+          <li> <a href="/">Login</a> </li>
+          <li><a href="/transactions">All transactions</a></li>
+          <li><a href="/merchants">Merchants</a></li>
+          <li><a href="/tags">Categories</a></li>
+        <% end %>
       </ul>
-      </nav>
+    </nav>
 
 
     <div class="col-2">
@@ -46,77 +43,4 @@
   <article><%= yield %></article>
   </main>
 </body>
-<!-- </div>
-      <div id="left" class="column">
-          <div class="top-left">
-            <img src="/piggy-bank.svg" id="piggybank">
-              <div class="centered">
-                <%= @name? @name : "Nobody here"%>
-              </div>
-          </div>
-          </div>
-          <div class="bottom">
-            <% if @account_id %>
-            <ul>
-            <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
-
-            <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
-
-            <% else %>
-                <li><a href="/merchants">Merchants</a></li>
-                <li><a href="/tags">Categories</a></li>
-            <% end %>
-          </ul>
-          </div>
-      </div>
-      <div id="right" class="column">
-          <div class="top-right">
-            <h1>Frugal</h1>
-          </div>
-          <div class="bottom">
-            <main>
-          <%= yield %>
-        </main>
-          </div>
-      </div>
-  </body> -->
-  <!-- <body>
-    <div id = "container">
-    <header>
-        <a href="/">
-          <h1>Frugal</h1>
-        </a>
-    </header>
-    <div id = "contents">
-      <nav>
-        <h1></h1>
-        <ul>
-
-
-
-              <div id="login-logo"><img src="/piggy-bank.svg" id="myImage">
-
-              <div class="centered">
-
-                <%= @name? @name : "Nobody here"%>
-
-              </div>
-            </div>
-          <% if @account_id %>
-          <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
-
-          <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
-
-          <% else %>
-              <li><a href="/merchants">Merchants</a></li>
-              <li><a href="/tags">Categories</a></li>
-          <% end %>
-        </ul>
-      </nav>
-      <main>
-    <%= yield %>
-  </main>
-  </div>
-  </div>
-  </body> -->
 </html>
