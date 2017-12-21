@@ -20,9 +20,24 @@ post('/:id/transactions/month_total') do
   @transactions = @user.transactions()
   @show_month = true
   @name = @user.name
+  @tags = Tag.all()
   erb(:'transactions/user_index')
 
 end
+
+get('/:account_id/transactions/tag/:tag_id') do
+  @account_id = params['account_id'].to_i
+  @user = User.find(@account_id)
+  @tag_id = params['tag_id'].to_i
+  @tag = Tag.find(@tag_id)
+  @monthly_spend = Transaction.sum_by_month_for_user(@month, @account_id)
+  @monthly_transactions = Transaction.transaction_by_month(@month)
+  @transactions = @user.transactions()
+  @show_month = true
+  @name = @user.name
+  erb(:'transactions/user_index')
+end
+
 
 get ('/transactions') do
   @transactions = Transaction.all()

@@ -9,6 +9,11 @@
   <% else %>
   You managed to save £ <%= ((@user.monthly_budget_limit).to_f - @monthly_spend.to_f).round(2)  %>
   <% end %>
+
+  <%= erb(:'transactions/shared/user_tag_totals') %>
+
+
+  <h2>All of your transactions in <%=Date::MONTHNAMES[@month.to_i]%></h2>
   <table class="table-fill">
     <thead>
       <tr>
