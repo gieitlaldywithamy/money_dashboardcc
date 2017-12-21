@@ -9,16 +9,25 @@
           <a href="/">Login</a>
           <% end %>
       </li>
-      <li><a href="/<%=@account_id%>/transactions">Transactions</a></li>
-      <li><a href="/<%=@account_id%>/transactions/new">Add entry</a></li>
-      <li><a href="/merchants">Merchants</a></li>
-      <li><a href="/tags">Categories</a></li>
-      <li><a href="/<%=@account_id%>/users/show">Account settings</a> </li>
+      <li><a href="/<%=@account_id%>/transactions" style="
+text-decoration: none">Transactions</a></li>
+      <li><a href="/<%=@account_id%>/transactions/new" style="
+text-decoration: none">Add entry</a></li>
+      <li><a href="/merchants" style="
+text-decoration: none">Merchants</a></li>
+      <li><a href="/tags" style="
+text-decoration: none">Categories</a></li>
+      <li><a href="/<%=@account_id%>/users/show" style="
+text-decoration: none">Account settings</a> </li>
     <% else %>
-      <li> <a href="/">Login</a> </li>
-      <li><a href="/transactions">All transactions</a></li>
-      <li><a href="/merchants">Merchants</a></li>
-      <li><a href="/tags">Categories</a></li>
+      <li> <a href="/" style="
+text-decoration: none">Login</a> </li>
+      <li><a href="/transactions" style="
+text-decoration: none">All transactions</a></li>
+      <li><a href="/merchants" style="
+text-decoration: none">Merchants</a></li>
+      <li><a href="/tags" style="
+text-decoration: none">Categories</a></li>
     <% end %>
   </ul>
 </nav>

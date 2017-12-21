@@ -32,11 +32,13 @@
       <h4>You spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h4>
       <h4> Your total spending is <%= @user.spent() %> </h4>
 
-<a href="/<%=@account_id%>/transactions/filter_tag">Order By Tag</a>
+<a href="/<%=@account_id%>/transactions/filter_tag" style="
+text-decoration: none">Order By Tag</a>
 
 <%= erb(:'transactions/shared/table') %>
 
 <% else %>
 <h2> You need to enter some of your spending. </h2>
-<a href="/<%=@account_id%>/transactions/new">Add entry</a>
+<a href="/<%=@account_id%>/transactions/new" style="
+text-decoration: none">Add entry</a>
 <% end %>

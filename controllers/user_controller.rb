@@ -11,9 +11,8 @@ require_relative('../models/merchant.rb')
 require_relative('../models/user.rb')
 
 get('/users') do
-   # @user = User.find(id)
   @users = User.all()
-  # @tag = Tag.all()[1]
+  @error = env['sinatra.error']
   erb(:'users/index')
 end
 
@@ -22,10 +21,12 @@ get('/users/new') do
 end
 
 get('/:id/users/edit') do
-  @user = User.find(params[:id])
-  @account_id = @user.id
-  @name = @user.name
-  erb(:'users/edit')
+
+    @user = User.find(params[:id])
+    @account_id = @user.id
+    @name = @user.name
+    erb(:'users/edit')
+
 end
 
 get('/:id/users/show') do
@@ -38,19 +39,31 @@ end
 
 
 post('/users') do
-   p params
-    @user = User.new(params)
-    p "id", params['id']
-    @user.save()
-    redirect to "/users"
+
+    if params["name"].nil? || params["budget"].nil?
+      params['error'] = "Try again! Need more information"
+      redirect to '/users/new'
+    else
+      @user = User.new(params)
+      @user.save()
+      redirect to "/users"
+    end
+
+
 end
 
 post('/users/:id') do
-
+  if params["name"].nil? || params["budget"].nil?
+    params['error'] = "Some fields were empty!"
+    @user = User.find(params[:id])
+    @account_id = @user.id
+    @name = @user.name
+    erb(:'users/edit')
+  else
     @user = User.new(params)
-    p "id", params['id']
     @user.save()
     redirect to "/users"
+  end
 end
 
 post ('/:id/users/delete') do

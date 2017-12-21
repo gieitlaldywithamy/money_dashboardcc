@@ -1,8 +1,4 @@
 
-
-<h3>Users</h3>
-
-
 <div>
   <table style="float: left">
     <tr>
@@ -13,14 +9,16 @@
     <% for user in @users %>
     <tr>
 
-    <td> <a href="/<%=user.id%>/transactions"><%=user.name%></a></td>
+    <td> <a href="/<%=user.id%>/transactions" style="
+text-decoration: none"><%=user.name%></a></td>
     <td style="inline">
     <progress class="budget" max="100" value="<%= user.budget_percent %>">
       <strong><%= user.budget_percent %></strong>
     </progress>
     <p><%= user.budget_percent.round() %>% spent</p>
   </td>
-  <td> <a href="/<%=user.id%>/users/show">Details</a> </td>
+  <td> <a href="/<%=user.id%>/users/show" style="
+text-decoration: none">Details</a> </td>
 </tr>
     <% end %>
 

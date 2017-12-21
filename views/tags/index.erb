@@ -1,11 +1,13 @@
 
 <h1>Categories</h1>
-<a href="/tags/show_totals">See how much is spent in each category</a>
+<a href="/tags/show_totals" style="
+text-decoration: none">See how much is spent in each category</a>
 <ul>
   <% for tag in @tags %>
   <li><%= tag.name %></li>
 
   <% end %>
 
-  <a href="/tags/new">Create a new tag</a>
+  <a href="/tags/new" style="
+text-decoration: none">Create a new tag</a>
 </ul>

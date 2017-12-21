@@ -1,3 +1,7 @@
+
+<% if params['error'] %>
+<%= erb(:'error/no_user') %>
+<% end %>
 <form class="" action="/users/<%=@user.id%>" method="post">
 
   <label for="user_name">Name</label>

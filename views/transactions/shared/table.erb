@@ -19,7 +19,8 @@
 
       <td class="text-left"> <%= transaction.tag.name %></td>
       <td class="text-left"> <%= transaction.merchant.name %></td>
-      <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>">Details</a> </td>
+      <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>" style="
+text-decoration: none">Details</a> </td>
     </tr>
     <% end %>
   </tbody>

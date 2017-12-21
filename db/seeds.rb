@@ -9,9 +9,9 @@ Merchant.delete_all()
 Tag.delete_all()
 User.delete_all()
 
-user1 = User.new('name' => 'Amy','budget_limit' => 1800, 'time_period_end' => '2018-1-18')
+user1 = User.new('name' => 'Amy','budget_limit' => 1800)
 user1.save()
-user2 = User.new('name' => 'Eleanor','budget_limit' => 800, 'time_period_end' => '2018-1-18')
+user2 = User.new('name' => 'Eleanor','budget_limit' => 800)
 user2.save()
 
 # Tags
@@ -67,12 +67,15 @@ weekly_shop = Transaction.new(
   {'name' => 'Weekly food shop',
     'value' => 40.00,
     'merchant_id' => tesco.id,
+
+    'transaction_date' => "2017-12-19",
     'tag_id' => food_shop.id,
     'account_id' => user1.id})
 
 loud_poets = Transaction.new({
   'name' => 'Loud poets',
   'value' => 12.00,
+  'transaction_date' => "2017/12/19",
   'merchant_id' => henrys.id,
   'tag_id' => nights_out.id,
   'account_id' => user1.id
@@ -81,7 +84,7 @@ loud_poets = Transaction.new({
 rent = Transaction.new({
   'name' => 'Rent',
   'value' => 400.00,
-  'transaction_date' => 1/12/17,
+  'transaction_date' => "2017/12/19",
   'merchant_id' => landlord.id,
   'tag_id' => rent.id,
   'account_id' => user1.id
@@ -90,7 +93,7 @@ rent = Transaction.new({
 council_tax = Transaction.new({
   'name' => 'Council tax',
   'value' => 50.00,
-  'transaction_date' => 1/12/17,
+  'transaction_date' => "2017/12/19",
   'merchant_id' => edinburgh_council.id,
   'tag_id' => council_tax.id,
   'account_id' => user1.id
@@ -99,7 +102,7 @@ council_tax = Transaction.new({
 travel = Transaction.new({
   'name' => 'Stirling trip',
   'value' => 20.50,
-  'transaction_date' => 5/12/17,
+  'transaction_date' => "2017/12/19",
   'merchant_id' => scotrail.id,
   'tag_id' => travel.id,
   'account_id' => user2.id

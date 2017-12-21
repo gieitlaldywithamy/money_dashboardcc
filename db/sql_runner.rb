@@ -3,7 +3,7 @@ require ('pg')
 class SqlRunner
 
   def SqlRunner.run(sql, values = [])
-   db = PG.connect({dbname: 'skint', host: 'localhost'})
+   db = PG.connect({dbname: 'piggy_bank', host: 'localhost'})
    db.prepare("query", sql)
    result = db.exec_prepared("query", values)
    db.close()

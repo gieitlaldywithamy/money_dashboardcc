@@ -11,12 +11,25 @@ header {
 }
 
 
-/*** Flexbox layout from online **/
+body > div > main > article > h3 > a:hover {
+  color: #CAE9EC;
+}
 
-* {
-    box-sizing: border-box;
+body > div > main > article > form > label  {
+    width: 30%;
+    text-align: right;
+}
 
-  }
+body > div > main > article > form > label + input {
+    width: 30%;
+    margin: 0 30% 0 4%;
+}
+
+body > div > main > article > form > input + input {
+    float: right;
+}
+
+
   body {
     display: flex;
     flex-direction: row;
@@ -42,21 +55,11 @@ header {
     background-color: #E0E0E0;
     padding-bottom: 10em;
   }
-  /* .content > article {
-    flex: 4;
-    min-height: 60vh;
-  } */
-
 
 
   ul {
   list-style-type: none;
 }
-
-
-
-/*** Table Styles **/
-
 
 
 th {
@@ -80,13 +83,3 @@ tr:hover td {
 
 
 }
-/*
-td {
-  background:#FFFFFF;
-  padding:20px;
-  vertical-align:middle;
-  font-weight:300;
-  font-size:18px;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
-  border-right: 1px solid #C1C3D1;
-} */

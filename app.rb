@@ -15,5 +15,6 @@ get '/' do
   @dec_transactions = Transaction.sum_by_month_for_user(12,2)
   @transactions_sum = Transaction.total_spent()
   @users = User.all
+  p @users
     erb(:index)
 end
