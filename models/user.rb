@@ -44,11 +44,13 @@ class User
     return transactions
   end
   def has_used_account()
-    return Transaction.user_all(@id).count() > 0
+    return transactions().count() > 0
+    #  return Transaction.user_all(@id).count() > 0
+    # return Transaction.user_all(@id).count() > 0
   end
 
   def tag_sums_for_month(tag_id, month)
-    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2 AND tag_id = $3 order by sum;"
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2 AND tag_id = $3 order by sum desc;"
     total_spent = SqlRunner.run(sql, [month, @id, tag_id])[0]['sum']
     return total_spent || 0
   end

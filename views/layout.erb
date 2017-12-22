@@ -10,7 +10,7 @@
     <%= erb(:'partials/nav') %>
     <div class="col-2">
       <header>
-        <% if @name %> <%= @name %>'s PiggyBank £<%= @user.budget_left.round(2) %> left
+        <% if @name %> <%= @name %>'s PiggyBank £<%= sprintf('%.2f', @user.budget_left)%> left
         <% else %>
           PiggyBank
         <% end %>

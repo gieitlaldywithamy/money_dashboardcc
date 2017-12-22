@@ -15,6 +15,7 @@
 
 
         <h4>You have spent most on <%= Tag.find(Transaction.total_spent_user_tag(@user)).name %></h4>
+
         <h4> Your total spending is <%= @user.spent_yearly() %> </h4>
 
   <form action="/<%=@user.id%>/transactions/month_total" method="post">
@@ -32,11 +33,22 @@
   <%= erb(:'transactions/shared/monthly_spend') %>
   <% end %>
 
+  <!-- <form action="/<%=@user.id%>/transactions/month_total" method="post">
+        <label for="monthly_spend">Check monthly spend for</label>
+        <select name="month" id="monthly_spend">
+          <% [*1..12].each do |month| %>
+            <option value="<%=month%>"><%=Date::MONTHNAMES[month]%></option>
+          <% end %>
+        </select>
+      </select>
+      <input type="submit" name="" value="Find out">
+  </form> -->
+
 
 <a href="/<%=@account_id%>/transactions/filter_tag" style="
 text-decoration: none">Order By Tag</a>
 
-<%= erb(:'transactions/shared/table') %>
+<%= erb(:'shared/transaction_table') %>
 
 <% else %>
 <h2> You need to enter some of your spending. </h2>

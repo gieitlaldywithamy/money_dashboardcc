@@ -83,3 +83,11 @@ tr:hover td {
 
 
 }
+
+h4#overspent {
+  color: 	#FF0000;
+}
+
+h4#warning {
+  color: 	#FFBF00;
+}

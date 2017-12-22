@@ -71,11 +71,7 @@ class Transaction
     return transactions
   end
 
-  def Transaction.user_all(id)
-    sql = "SELECT * FROM transactions WHERE account_id = $1;"
-    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
-    return transactions
-  end
+
 
   def Transaction.user_all_tag_sort(id)
     sql = "SELECT * FROM transactions WHERE account_id = $1 ORDER BY tag_id;"
@@ -134,17 +130,6 @@ class Transaction
       return 0
     end
   end
-
-  # def Transaction.find_multiple_by_month_year(date1, date2)
-  #     sql = "select * from transactions where
-  #     transaction_date >= $1 and transaction_date <= $2;"
-  #     hashes = SqlRunner.run(sql, [date1, date2])
-  #     result_final = hashes.map {
-  #       |transaction| Transaction.new(transaction) }
-  #     return result_final
-  #     end
-
-
 
 
 end

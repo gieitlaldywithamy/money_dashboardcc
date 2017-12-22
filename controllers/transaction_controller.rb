@@ -56,10 +56,13 @@ get('/:id/transactions/filter_tag') do
 end
 
 get('/:id/transactions') do
+
+
    # @user = User.find(id)
-  @transactions = Transaction.user_all(params[:id].to_i)
+
   @account_id = params[:id].to_i
   @user = User.find(params[:id].to_i)
+  @transactions = @user.transactions
   p params, "getting user trans"
   @name = User.find(params[:id].to_i).name
   @monthly_spend = Transaction.sum_by_month_for_user(Date.today.month, @account_id)
