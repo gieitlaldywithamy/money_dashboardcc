@@ -5,7 +5,7 @@ My first solo project while studying at CodeClan with the aim of consolidating t
 This is a full-stack web-based money tracker app (think of money dashboard) using the Model View Controller design pattern, PostgreSQL for CRUD actions and the Sinatra framework to handle RESTful routing.
 
 
-## MoneyCashboard
+## Project Specifications
 
 You want to start tracking your spending in an attempt to be more frugal with money. You have decided to make a budgeting app to help you see where all of your money is being spent.
 
