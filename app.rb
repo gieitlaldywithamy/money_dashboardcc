@@ -3,12 +3,11 @@ require('sinatra/contrib/all') if development?
 enable :sessions
 
 require_relative('./controllers/transaction_controller.rb')
-require_relative('./controllers/merchant_controller.rb')
-require_relative('./controllers/Category_controller.rb')
+require_relative('./controllers/category_controller.rb')
 require_relative('./controllers/user_controller.rb')
 
 require_relative('./models/transaction.rb')
-require_relative('./models/Category.rb')
+require_relative('./models/category.rb')
 require_relative('./models/merchant.rb')
 require_relative('./models/user.rb')
 
