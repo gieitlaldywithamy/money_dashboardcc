@@ -4,6 +4,7 @@ My first solo project while studying at CodeClan with the aim of consolidating t
 
 This is a full-stack web-based money tracker app (think of money dashboard) using the Model View Controller design pattern, PostgreSQL for CRUD actions and the Sinatra framework to handle RESTful routing.
 
+https://piggybank-money-tracker.herokuapp.com
 
 ## Project Specifications
 
