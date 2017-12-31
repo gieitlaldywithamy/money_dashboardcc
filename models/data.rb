@@ -1,5 +1,5 @@
 require('./db/sql_runner')
-require('pry-byebug')
+#require('pry-byebug')
 require_relative('./merchant.rb')
 require_relative('./Category.rb')
 
