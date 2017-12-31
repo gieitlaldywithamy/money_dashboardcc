@@ -1,5 +1,5 @@
 require 'sinatra'
-require 'sinatra/contrib/all'
+require require('sinatra/contrib/all') if development?
 enable :sessions
 
 require_relative('./controllers/transaction_controller.rb')

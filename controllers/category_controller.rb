@@ -1,6 +1,6 @@
 require 'pry-byebug'
 require 'sinatra'
-require 'sinatra/contrib/all'
+require require('sinatra/contrib/all') if development?
 
 require_relative('merchant_controller.rb')
 require_relative('category_controller.rb')
