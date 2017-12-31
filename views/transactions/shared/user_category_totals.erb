@@ -1,0 +1,18 @@
+
+<!-- <h2>On average, you was spent on <%=Category.get_name_by_id(Category.most_spent_on())%></h2>
+ -->
+
+<table>
+  <h2>How much you spent in each category in <%=Date::MONTHNAMES[@month.to_i]%></h2>
+  <tr>
+    <th>Category</th>
+    <th>Total Spent</th>
+  </tr>
+  <% for category in @categories %>
+  <tr>
+    <td><%= category.name %></a></td>
+    <td><%= @user.category_sums_for_month(category.id, @month) %></td>
+
+  </tr>
+  <% end %>
+</table>

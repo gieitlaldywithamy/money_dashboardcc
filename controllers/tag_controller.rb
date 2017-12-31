@@ -3,29 +3,29 @@ require 'sinatra'
 require 'sinatra/contrib/all'
 
 require_relative('merchant_controller.rb')
-require_relative('tag_controller.rb')
+require_relative('Category_controller.rb')
 
 require_relative('../models/transaction.rb')
-require_relative('../models/tag.rb')
+require_relative('../models/Category.rb')
 require_relative('../models/merchant.rb')
 
-get('/tags') do
-  @tags = Tag.all()
-  erb(:'tags/index')
+get('/Categorys') do
+  @Categorys = Category.all()
+  erb(:'Categorys/index')
 end
 
-post('/tags') do
-  merchant = Tag.new(params)
+post('/Categorys') do
+  merchant = Category.new(params)
   merchant.save()
-  redirect to ('/tags')
+  redirect to ('/Categorys')
 end
 
-get('/tags/new') do
-  @tags = Tag.all()
-  erb(:'tags/new')
+get('/Categorys/new') do
+  @Categorys = Category.all()
+  erb(:'Categorys/new')
 end
 
-get('/tags/show_totals') do
-  @tags = Tag.all()
-  erb(:'tags/show_totals')
+get('/Categorys/show_totals') do
+  @Categorys = Category.all()
+  erb(:'Categorys/show_totals')
 end

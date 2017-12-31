@@ -12,18 +12,14 @@
  <input id="transaction_date" name="transaction_date" type="date">
 
 </br>
- <label for="merchant_select">Merchant</label>
- <select class="" name="merchant_id" id="merchant_select">
-   <% @merchants.each do |merchant| %>
-  <option value="<%= merchant.id %>"><%= merchant.name %></option>
-  <% end %>
- </select>
+ <label for="merchant_description">Merchant</label>
+ <input type="text" id="merchant_description" name="merchant" value="">
 <br>
 
-<label for="tag_select">Tag</label>
- <select name="tag_id" id="tag_select">
-   <% @tags.each do |tag| %>
-  <option value="<%= tag.id %>"><%= tag.name %></option>
+<label for="category_select">Category</label>
+ <select name="category_id" id="category_select">
+   <% @categories.each do |category| %>
+  <option value="<%= category.id %>"><%= category.name %></option>
   <% end %>
  </select>
  <br>

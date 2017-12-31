@@ -10,7 +10,7 @@
   You managed to save £ <%= ((@user.monthly_budget_limit).to_f - @monthly_spend.to_f).round(2)  %>
   <% end %>
 
-  <%= erb(:'transactions/shared/user_tag_totals') %>
+  <%= erb(:'transactions/shared/user_category_totals') %>
 
 
   <h2>All of your transactions in <%=Date::MONTHNAMES[@month.to_i]%></h2>
@@ -33,9 +33,9 @@
         <td class="text-left"> <%= transaction.name %></td>
         <td class="text-left"> <%= transaction.value %></td>
 
-        <td class="text-left"> <%= transaction.tag.name %></td>
-        <td class="text-left"> <%= transaction.merchant.name %></td>
-        <td class="text-left"> <a href="/<%=transaction.account_id%>/transactions/<%= transaction.id %>" style="
+        <td class="text-left"> <%= transaction.category.name %></td>
+        <td class="text-left"> <%= transaction.merchant %></td>
+        <td class="text-left"> <a href="/transactions/<%= transaction.id %>" style="
   text-decoration: none">Details</a> </td>
       </tr>
       <% end %>

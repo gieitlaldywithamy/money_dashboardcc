@@ -2,12 +2,13 @@ require('./db/sql_runner')
 
 class User
 
-  attr_reader :id, :name, :annual_income, :monthly_budget_limit
+  attr_reader :id, :name, :password, :annual_income, :monthly_budget_limit
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @annual_income = options['annual_income'].to_f
+    @password = options['password']
     @monthly_budget_limit = set_budget()
   end
 
@@ -20,15 +21,15 @@ class User
   end
 
   def insert()
-    sql = "INSERT INTO users (name, annual_income) VALUES ($1, $2) RETURNING id;"
-    values = [@name, @annual_income]
+    sql = "INSERT INTO users (name, annual_income, password) VALUES ($1, $2, $3) RETURNING id;"
+    values = [@name, @annual_income, @password]
     user = SqlRunner.run(sql, values)
     @id = user[0]['id'].to_i
   end
 
   def update()
-    sql = "UPDATE users SET (name, annual_income) = ($1, $2) WHERE id=$3;"
-    values = [@name, @annual_income, @id]
+    sql = "UPDATE users SET (name, annual_income, password) = ($1, $2, $3) WHERE id=$4;"
+    values = [@name, @annual_income, @password, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -40,18 +41,19 @@ class User
 
   def transactions()
     sql = "SELECT * FROM transactions WHERE account_id = $1;"
-    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
+    transactions = SqlRunner.run_sql_and_map(sql, Transaction, [@id])
     return transactions
   end
+
   def has_used_account()
     return transactions().count() > 0
     #  return Transaction.user_all(@id).count() > 0
     # return Transaction.user_all(@id).count() > 0
   end
 
-  def tag_sums_for_month(tag_id, month)
-    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2 AND tag_id = $3 order by sum desc;"
-    total_spent = SqlRunner.run(sql, [month, @id, tag_id])[0]['sum']
+  def category_sums_for_month(category_id, month)
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2 AND category_id = $3 order by sum desc;"
+    total_spent = SqlRunner.run(sql, [month, @id, category_id])[0]['sum']
     return total_spent || 0
   end
 
@@ -109,6 +111,13 @@ class User
   def User.delete_all()
     sql = "DELETE FROM users;"
     SqlRunner.run(sql)
+  end
+
+  def User.login_find(username, password)
+    sql = "SELECT * FROM users WHERE name=$1 AND password = $2;"
+    user = SqlRunner.run_sql_and_map(sql, User, [username, password])
+
+    return user[0]
   end
 
   def all_transactions()

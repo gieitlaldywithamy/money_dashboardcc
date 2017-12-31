@@ -1,5 +1,5 @@
 
-<h2>On average, most was spent on <%=Tag.get_name_by_id(Tag.most_spent_on())%></h2>
+<h2>On average, most was spent on <%=Category.get_name_by_id(Category.most_spent_on())%></h2>
 
 
 <table>
@@ -7,10 +7,10 @@
     <th>Category</th>
     <th>Total Spent</th>
   </tr>
-  <% for tag in @tags %>
+  <% for Category in @Categorys %>
   <tr>
-    <td><%= tag.name %></a></td>
-    <td><%= Tag.total_spent_by_tag(tag) %></td>
+    <td><%= Category.name %></a></td>
+    <td><%= Category.total_spent_by_Category(Category) %></td>
 
   </tr>
   <% end %>

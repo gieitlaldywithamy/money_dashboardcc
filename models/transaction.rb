@@ -1,40 +1,40 @@
 require('./db/sql_runner')
 require('pry-byebug')
 require_relative('./merchant.rb')
-require_relative('./tag.rb')
+require_relative('./category.rb')
 
 class Transaction
 
-  attr_reader :id, :name, :value, :transaction_date, :merchant_id, :tag_id, :account_id
+  attr_reader :id, :name, :value, :transaction_date, :merchant, :category_id, :account_id
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
     @value = options['value']
     @transaction_date = options['transaction_date']
-    @merchant_id = options['merchant_id'].to_i()
-    @tag_id = options['tag_id'].to_i()
+    @merchant = options['merchant']
+    @category_id = options['category_id'].to_i()
     @account_id = options['account_id']
   end
 
   def save
     if @id
-      edit()
+      update()
     else
       insert()
     end
   end
 
   def insert()
-    sql = "INSERT INTO transactions (name, value, transaction_date, merchant_id, tag_id, account_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;"
-    values = [@name, @value, @transaction_date, @merchant_id, @tag_id, @account_id]
+    sql = "INSERT INTO transactions (name, value, transaction_date, merchant, category_id, account_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;"
+    values = [@name, @value, @transaction_date, @merchant, @category_id, @account_id]
     # auto generating date make optional? how?
     transaction = SqlRunner.run(sql, values)
     @id = transaction[0]['id'].to_i()
   end
 
-  def edit()
-    sql = "UPDATE transactions SET (name, value, transaction_date, merchant_id, tag_id, account_id) = ($1, $2, $3, $4, $5, $6) WHERE id = $7;"
-    values = [@name, @value, @transaction_date, @merchant_id, @tag_id, @account_id, @id]
+  def update()
+    sql = "UPDATE transactions SET (name, value, transaction_date, merchant, category_id, account_id) = ($1, $2, $3, $4, $5, $6) WHERE id = $7;"
+    values = [@name, @value, @transaction_date, @merchant, @category_id, @account_id, @id]
     SqlRunner.run(sql, values)
   end
 
@@ -44,12 +44,8 @@ class Transaction
     SqlRunner.run(sql, values)
   end
 
-  def merchant()
-    merchant = Merchant.find(@merchant_id)
-  end
-
-  def tag()
-    tag = Tag.find(@tag_id)
+  def category()
+    category = Category.find(@category_id)
   end
 
   def account()
@@ -71,10 +67,8 @@ class Transaction
     return transactions
   end
 
-
-
-  def Transaction.user_all_tag_sort(id)
-    sql = "SELECT * FROM transactions WHERE account_id = $1 ORDER BY tag_id;"
+  def Transaction.user_all_category_sort(id)
+    sql = "SELECT * FROM transactions WHERE account_id = $1 ORDER BY category_id;"
     transactions = SqlRunner.run_sql_and_map(sql, Transaction, [id])
     return transactions
   end
@@ -118,14 +112,14 @@ class Transaction
     return total_spent
   end
 
-  def Transaction.total_spent_user_tag(user)
-    sql = "select tag_id, SUM(value) FROM transactions WHERE account_id = $1 GROUP BY tag_id ORDER BY SUM(value) desc";
+  def Transaction.total_spent_user_category(user)
+    sql = "select category_id, SUM(value) FROM transactions WHERE account_id = $1 GROUP BY category_id ORDER BY SUM(value) desc";
     values = [user.id]
-    highest_tag = SqlRunner.run(sql, values)
+    highest_category = SqlRunner.run(sql, values)
     # would like to change this
 
-    if highest_tag.values.length > 0
-      return highest_tag[0]['tag_id']
+    if highest_category.values.length > 0
+      return highest_category[0]['category_id']
     else
       return 0
     end

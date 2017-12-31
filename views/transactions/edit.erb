@@ -1,7 +1,7 @@
 
-<form class="" action="/<%=@account_id%>/transactions/<%=@transaction.id%>" method="post">
+<form class="" action="/transactions/<%=@transaction.id%>" method="post">
 
-  <input type="hidden" name="account_id" value="<%=@account_id%>" id="name_input">
+  <input type="hidden" name="account_id" value="<%=session[:id]%>" id="name_input">
   <br>
   <label for="name_input">Name</label>
   <input type="text" name="name" value="<%= @transaction.name%>" id="name_input">
@@ -16,21 +16,13 @@
 
 
  <label for="merchant_select">Merchant</label>
- <select selected = "<%= @merchant_id %>"  name="merchant_id" id="merchant_select">
-   <% @merchants.each do |merchant| %>
+ <input type="text" name="merchant" value="<%= @transaction.merchant %>">
 
-   <% if merchant.id == @transaction.merchant_id %>
-      <option value=<%= merchant.id %> selected><%= merchant.name %></option>
-    <% else %>
-      <option value=<%= merchant.id %>><%= merchant.name %></option>
-    <% end %>
-  <% end %>
- </select>
 
- <label for="tag_select">Tags</label>
-  <select  name="tag_id" id="tag_select" selected = "<%= @transaction.tag_id %>">
-    <% @tags.each do |tag| %>
-     <option value="<%= tag.id %>" <%= "selected" if tag.id == @transaction.tag_id %>><%= tag.name %></option>
+ <label for="category_select">Categories</label>
+  <select name="category_id" id="category_select" selected = "<%= @transaction.category_id %>">
+    <% @categories.each do |category| %>
+     <option value="<%= category.id %>" <%= "selected" if category.id == @transaction.category_id %>><%= category.name %></option>
 
    <% end %>
   </select>

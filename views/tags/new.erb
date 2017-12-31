@@ -1,19 +1,19 @@
 <h2>New Category</h2>
 
-<form action="/tags" method="POST">
-  <label for="tag_input">Name</label>
-  <input id="tag_input" type="text" name="name" required>
+<form action="/Categorys" method="POST">
+  <label for="Category_input">Name</label>
+  <input id="Category_input" type="text" name="name" required>
 <input type="submit" class="button" value="Save"/>
 
 
 <table>
   <tr>
-    <th>Tags</th>
+    <th>Categorys</th>
   </tr>
 
-<% for tag in @tags%>
+<% for Category in @Categorys%>
    <tr>
-     <td><%= tag.name %></td>
+     <td><%= Category.name %></td>
    </tr>
 <% end %>
 </table>

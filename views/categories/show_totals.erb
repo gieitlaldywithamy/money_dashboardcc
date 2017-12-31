@@ -1,0 +1,32 @@
+<% if Category.anything_spent? %>
+<h2>On average, most was spent on <%=Category.get_name_by_id(Category.most_spent_on())%></h2>
+<% end %>
+
+<h3>Essential spending</h3>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Total Spent</th>
+  </tr>
+  <% for category in @essential_categories %>
+  <tr>
+    <td><%= category.name %></a></td>
+    <td><%= category.total_spent() %></td>
+
+  </tr>
+  <% end %>
+</table>
+<h3> Non-essential spending</h3>
+<table>
+  <tr>
+    <th>Category</th>
+    <th>Total Spent</th>
+  </tr>
+  <% for category in @luxury_categories %>
+  <tr>
+    <td><%= category.name %></a></td>
+    <td><%= category.total_spent() %></td>
+
+  </tr>
+  <% end %>
+</table>

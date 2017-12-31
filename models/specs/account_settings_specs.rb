@@ -3,7 +3,7 @@ require ("minitest/rg")
 
 require_relative("../user")
 require_relative("../merchant")
-require_relative("../tag")
+require_relative("../Category")
 require_relative("../transaction")
 
 class AccountSettingsTest < MiniTest::Test
@@ -11,23 +11,23 @@ class AccountSettingsTest < MiniTest::Test
   def setup
     Transaction.delete_all()
     Merchant.delete_all()
-    Tag.delete_all()
+    Category.delete_all()
     User.delete_all()
 
     @account_settings = User.new('name' => 'Amy','budget_limit' => 400, 'time_period_end' => '2018-02-18')
     @account_settings.save()
 
-    # Tags
-    rent = Tag.new({'name' => 'Rent'})
-    bills = Tag.new({'name' => 'Bills'})
-    council_tax = Tag.new({'name' => 'Council Tax'})
-    eating_out = Tag.new({'name' => 'Eating out'})
-    credit_card = Tag.new({'name' => 'Credit Card'})
-    entertainment = Tag.new({'name' => 'Entertainment'})
-    nights_out = Tag.new({'name' => 'Nights out'})
-    food_shop = Tag.new({'name' => 'Food shop'})
-    online_shopping = Tag.new({'name' => 'Online shopping'})
-    travel = Tag.new({'name' => 'Travel'})
+    # Categorys
+    rent = Category.new({'name' => 'Rent'})
+    bills = Category.new({'name' => 'Bills'})
+    council_tax = Category.new({'name' => 'Council Tax'})
+    eating_out = Category.new({'name' => 'Eating out'})
+    credit_card = Category.new({'name' => 'Credit Card'})
+    entertainment = Category.new({'name' => 'Entertainment'})
+    nights_out = Category.new({'name' => 'Nights out'})
+    food_shop = Category.new({'name' => 'Food shop'})
+    online_shopping = Category.new({'name' => 'Online shopping'})
+    travel = Category.new({'name' => 'Travel'})
 
     rent.save()
     bills.save()
@@ -70,13 +70,13 @@ class AccountSettingsTest < MiniTest::Test
     #   {'name' => 'Weekly food shop',
     #     'value' => 45.60,
     #     'merchant_id' => tesco.id,
-    #     'tag_id' => food_shop.id})
+    #     'Category_id' => food_shop.id})
     #
     # loud_poets = Transaction.new({
     #   'name' => 'Loud poets',
     #   'value' => 12.00,
     #   'merchant_id' => henrys.id,
-    #   'tag_id' => nights_out.save()
+    #   'Category_id' => nights_out.save()
     # })
     #
     # rent = Transaction.new({
@@ -84,7 +84,7 @@ class AccountSettingsTest < MiniTest::Test
     #   'value' => 400.00,
     #   'transaction_date' => 1/12/17,
     #   'merchant_id' => landlord.id,
-    #   'tag_id' => rent.save()
+    #   'Category_id' => rent.save()
     # })
     #
     # council_tax = Transaction.new({
@@ -92,14 +92,14 @@ class AccountSettingsTest < MiniTest::Test
     #   'value' => 50.00,
     #   'transaction_date' => 1/12/17,
     #   'merchant_id' => edinburgh_council.id,
-    #   'tag_id' => council_tax.id
+    #   'Category_id' => council_tax.id
     # })
     #
     # travel = Transaction.new({
     #   'name' => 'Stirling trip',
     #   'value' => 20.50,
     #   'merchant_id' => scotrail.id,
-    #   'tag_id' => travel.save()
+    #   'Category_id' => travel.save()
     # })
 
 

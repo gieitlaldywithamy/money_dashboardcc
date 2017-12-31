@@ -1,6 +1,6 @@
 require('./db/sql_runner')
 
-class Tag
+class Category
 
   attr_reader :id, :name
 
@@ -10,53 +10,53 @@ class Tag
   end
 
   def save()
-    sql = "INSERT INTO tags (name) VALUES ($1) RETURNING id;"
+    sql = "INSERT INTO Categorys (name) VALUES ($1) RETURNING id;"
     values = [@name]
-    tag = SqlRunner.run(sql, values)
-    @id = tag[0]['id'].to_i
+    Category = SqlRunner.run(sql, values)
+    @id = Category[0]['id'].to_i
   end
 
   def update()
-    sql = "UPDATE tags SET name = $1 WHERE id = $2;"
+    sql = "UPDATE Categorys SET name = $1 WHERE id = $2;"
     values = [@name, @id]
     SqlRunner.run(sql, values)
   end
 
   def delete()
-    sql = "DELETE FROM tags WHERE id = $1"
+    sql = "DELETE FROM Categorys WHERE id = $1"
     values = [@id]
     SqlRunner.run(sql, values)
   end
 
-  def Tag.find(id)
-    sql = "SELECT * FROM tags WHERE id=$1"
+  def Category.find(id)
+    sql = "SELECT * FROM Categorys WHERE id=$1"
     values = [id]
-    return SqlRunner.run_sql_and_map(sql, Tag, [id])[0]
+    return SqlRunner.run_sql_and_map(sql, Category, [id])[0]
   end
 
-  def Tag.delete_all()
-      sql = "DELETE FROM tags;"
+  def Category.delete_all()
+      sql = "DELETE FROM Categorys;"
       SqlRunner.run(sql)
   end
 
-  def Tag.all()
-      sql = "SELECT * FROM tags;"
-      merchants = SqlRunner.run_sql_and_map(sql, Tag)
+  def Category.all()
+      sql = "SELECT * FROM Categorys;"
+      merchants = SqlRunner.run_sql_and_map(sql, Category)
   end
 
-  def Tag.get_name_by_id(id)
-    return (Tag.find(id)).name
+  def Category.get_name_by_id(id)
+    return (Category.find(id)).name
   end
 
-  def Tag.most_spent_on()
-    sql = "select sum(value),tag_id from transactions GROUP BY tag_id ORDER BY sum desc"
-    result = SqlRunner.run(sql)[0]['tag_id']
+  def Category.most_spent_on()
+    sql = "select sum(value),Category_id from transactions GROUP BY Category_id ORDER BY sum desc"
+    result = SqlRunner.run(sql)[0]['Category_id']
     return result.to_i
   end
 
-  def Tag.total_spent_by_tag(tag)
-    sql = "SELECT SUM(value) FROM transactions WHERE tag_id = $1"
-    values = [tag.id]
+  def Category.total_spent_by_Category(Category)
+    sql = "SELECT SUM(value) FROM transactions WHERE Category_id = $1"
+    values = [Category.id]
 
     total_spent = SqlRunner.run(sql, values)[0]['sum']
     return total_spent || 0

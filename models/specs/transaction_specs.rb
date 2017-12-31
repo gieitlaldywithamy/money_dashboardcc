@@ -3,7 +3,7 @@ require("minitest/rg")
 
 require_relative("../merchant.rb")
 require_relative("../transaction.rb")
-require_relative("../tag.rb")
+require_relative("../Category.rb")
 
 class TransactionTest < MiniTest::Test
 
@@ -12,15 +12,15 @@ class TransactionTest < MiniTest::Test
     @margiotta = Merchant.new({'name' => 'Margiotta'})
     @amazon = Merchant.new({'name' => 'Amazon'})
     @spoons = Merchant.new({'name' => 'Wetherspoons'})
-    @fags = Tag.new({'name' => 'fags'})
-    @meals_out = Tag.new({'name' => 'eating out'})
-    @home_food = Tag.new({'name' => 'food shopping'})
-    @nights_out = Tag.new({'name' => 'nights out'})
-    @shopping = Tag.new({'name' => 'shopping'})
-    @buying_fags = Transaction.new({'value' => 750, 'merchant_id' => @margiotta.id, 'tag_id' => @fags.id})
-    @buying_beer = Transaction.new({'value' => 10, 'merchant_id' => @spoons.id, 'tag_id' => @nights_out.id})
-    @food_shop = Transaction.new({'value' => 4000, 'merchant_id' => @tesco.id, 'tag_id' => @home_food.id})
-    @socks = Transaction.new({'value' => 50, 'merchant_id' => @tesco.id, 'tag_id' => @shopping.id})
+    @fags = Category.new({'name' => 'fags'})
+    @meals_out = Category.new({'name' => 'eating out'})
+    @home_food = Category.new({'name' => 'food shopping'})
+    @nights_out = Category.new({'name' => 'nights out'})
+    @shopping = Category.new({'name' => 'shopping'})
+    @buying_fags = Transaction.new({'value' => 750, 'merchant_id' => @margiotta.id, 'Category_id' => @fags.id})
+    @buying_beer = Transaction.new({'value' => 10, 'merchant_id' => @spoons.id, 'Category_id' => @nights_out.id})
+    @food_shop = Transaction.new({'value' => 4000, 'merchant_id' => @tesco.id, 'Category_id' => @home_food.id})
+    @socks = Transaction.new({'value' => 50, 'merchant_id' => @tesco.id, 'Category_id' => @shopping.id})
     # you cant use id here because these objects arent saved!!!!
   end
 

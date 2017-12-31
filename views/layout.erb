@@ -10,7 +10,7 @@
     <%= erb(:'partials/nav') %>
     <div class="col-2">
       <header>
-        <% if @name %> <%= @name %>'s PiggyBank £<%= sprintf('%.2f', @user.budget_left)%> left
+        <% if session[:id] %> <%= User.find(session[:id]).name %>'s PiggyBank £<%= sprintf('%.2f', User.find(session[:id]).budget_left)%> left
         <% else %>
           PiggyBank
         <% end %>

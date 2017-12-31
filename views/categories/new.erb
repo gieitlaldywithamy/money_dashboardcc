@@ -1,0 +1,19 @@
+<h2>New Category</h2>
+
+<form action="/categories" method="POST">
+  <label for="category_input">Name</label>
+  <input id="category_input" type="text" name="name" required>
+<input type="submit" class="button" value="Save"/>
+
+
+<table>
+  <tr>
+    <th>Categorys</th>
+  </tr>
+
+<% for category in @categories%>
+   <tr>
+     <td><%= category.name %></td>
+   </tr>
+<% end %>
+</table>

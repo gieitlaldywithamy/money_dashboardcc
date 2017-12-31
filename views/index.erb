@@ -1,6 +1,6 @@
 <h2>Welcome to Piggybank</h2>
 
-<h3>"Login" or create a <a href="/users/new" style="
+<h3> <a href="/sessions/login">Login</a> or create a <a href="/registrations/signup" style="
 text-decoration: none">new user</a>.</h3>
 
   <table>
@@ -9,11 +9,10 @@ text-decoration: none">new user</a>.</h3>
       <th>Budget</th>
     </tr>
       <% for user in @users %>
-      
+
         <tr>
           <td>
-            <a href="/<%=user.id%>/transactions" style="
-text-decoration: none"><%=user.name%></a>
+            <p><%=user.name%></p>
           </td>
           <td style="white-space:nowrap;">
             <progress class="budget" max="100" value="<%= user.budget_percent %>">
