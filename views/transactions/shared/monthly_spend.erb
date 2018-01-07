@@ -1,7 +1,7 @@
 
   <% if @monthly_spend %>
   Your total spend in <%=Date::MONTHNAMES[@month.to_i]%> is £ <%= @monthly_spend  %>
-  <% month_save = ((@user.monthly_budget_limit).to_f - @monthly_spend.to_f).round(2)  %>
+  <% month_save = ((@user.monthly_budget_limit).to_f - @monthly_spend.to_f)  %>
   <% if month_save == 0 %>
   <p>You broke even </p>
   <% elsif month_save <= 0 %>

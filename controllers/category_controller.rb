@@ -1,6 +1,6 @@
 require 'pry-byebug' if development?
 require 'sinatra'
-require('sinatra/contrib/all') if development?
+# require('sinatra/contrib/all') if development?
 
 require_relative('../models/transaction.rb')
 require_relative('../models/category.rb')

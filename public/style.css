@@ -38,7 +38,7 @@ body > div > main > article > form > input + input {
   }
   .col-1 {
     background: #FFB6C1;
-    flex: 1;
+    flex: 2;
 
   }
   .col-2 {

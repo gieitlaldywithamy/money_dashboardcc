@@ -2,15 +2,17 @@
 <% if params['error'] %>
 <%= erb(:'error/no_user') %>
 <% end %>
-  <form class="" action="/users" method="post">
-    <%= @account_id %>
-    <label for="user_name">Name</label>
-    <input type="text" name="name" value="" id="user_input">
-    <br>
+<form class="" action="/registrations" method="post">
+  <label for="user_name">username</label>
+  <input type="text" name="name" value="" id="user_input">
+  <br>
 
-   <label for="budget_limit">What's your annual income?</label>
-   <input type="number" name="annual_income" step="any" min="0" value="" id="budget_input">
-   <br>
+  <label for="user_name">password</label>
+  <input type="text" name="password" value="" id="user_input">
+  <br>
+ <label for="budget_limit">annual income?</label>
+ <input type="number" name="annual_income" step="any" min="0" value="" id="budget_input">
+ <br>
 
-    <input type="submit" name="" value="Save">
-  </form>
+  <input type="submit" name="" value="Save">
+</form>

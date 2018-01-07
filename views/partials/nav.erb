@@ -6,6 +6,8 @@
           <%= @name %>
 
       </li>
+      <li><a href="/dashboard" style="
+text-decoration: none">Dashboard</a></li>
       <li><a href="/transactions" style="
 text-decoration: none">Transactions</a></li>
       <li><a href="/transactions/new" style="
@@ -15,9 +17,6 @@ text-decoration: none">Categories</a></li>
       <li><a href="/users/show" style="
 text-decoration: none">Account settings</a> </li>
 <li><a href="/sessions/logout">Log Out</a></li>
-    <% else %>
-      <li> <a href="/sessions/login" style="
-text-decoration: none">Login</a> </li>
-    <% end %>
   </ul>
+  <% end %>
 </nav>

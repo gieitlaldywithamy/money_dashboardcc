@@ -1,14 +1,11 @@
 
 
 
-<h4>Your name is <%= @user.name %> and you earn  <%= @user.annual_income %>
+<h4>Your name is <%= @user.name %> and you earn <%= sprintf('£%.2f', @user.annual_income) %>
 a year</h4>
 
-<a href="/<%=@user.id%>/users/edit" style="
+<a href="/users/edit" style="
 text-decoration: none">Not right?</a>
-<form method="post" action="/<%=@user.id%>/users/delete">
+<form method="post" action="/users/delete">
   <input type="submit" value="Delete"/>
 </form>
-
-<a href="/" style="
-text-decoration: none">Logout</a>

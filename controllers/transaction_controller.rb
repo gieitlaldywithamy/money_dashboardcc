@@ -1,6 +1,6 @@
 require 'pry-byebug' if development?
 require 'sinatra'
-require('sinatra/contrib/all') if development?
+# require('sinatra/contrib/all') if development?
 
 require_relative('../models/transaction.rb')
 require_relative('../models/category.rb')
@@ -37,7 +37,8 @@ end
 
 
 get ('/transactions') do
-  @transactions = Transaction.all()
+  @user = User.find(session[:id])
+  @transactions = @user.transactions
   erb(:'transactions/index')
 end
 

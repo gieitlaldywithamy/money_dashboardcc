@@ -84,11 +84,9 @@ class Category
   end
 
   def Category.most_spent_on()
-    sql = "select sum(value),category_id from transactions GROUP BY category_id ORDER BY sum desc"
-
+    sql = "SELECT SUM(value),category_id FROM transactions GROUP BY category_id ORDER BY sum DESC;"
     result = SqlRunner.run(sql)
     return result[0]['category_id'].to_i
-
   end
 
   def Category.total_spent_by_category(category)

@@ -2,7 +2,7 @@ require_relative('../models/merchant')
 require_relative('../models/category')
 require_relative('../models/transaction')
 require_relative('../models/user')
-
+require 'pry-byebug'
 
 # Transaction.delete_all()
 Category.delete_all()
@@ -102,3 +102,8 @@ end
 # council_tax.save()
 # travel.save()
  # how to make save option with date
+
+
+
+binding.pry
+nil

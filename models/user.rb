@@ -2,8 +2,8 @@ require('./db/sql_runner')
 
 class User
 
-  attr_reader :id, :name, :password, :annual_income, :monthly_budget_limit
-
+  attr_reader :name, :password, :annual_income, :monthly_budget_limit
+  attr_accessor :id
   def initialize(options)
     @id = options['id'].to_i if options['id']
     @name = options['name']
@@ -65,13 +65,6 @@ class User
     return (spent_on_current_month().to_f/@monthly_budget_limit)*100
   end
 
-  def spent_yearly()
-    sql = "SELECT SUM(value) FROM transactions WHERE account_id = $1"
-    values = [@id]
-    total_spent = SqlRunner.run(sql, values)[0].values().first()
-    return total_spent
-  end
-
   def budget_left()
     if over_budget()
       return 0
@@ -85,17 +78,17 @@ class User
   end
 
   def spent_on_month(month)
-    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
-    values = [month, @id]
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND EXTRACT(YEAR FROM transactions.transaction_date) = $2 AND account_id = $3"
+    values = [month, Date.today.year, @id]
     total_spent = SqlRunner.run(sql, values)[0].values().first()
-    return total_spent
+    return total_spent || 0
   end
 
   def spent_on_current_month()
-    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
-    values = [Date.today.month, @id]
+    sql = "SELECT SUM(value) FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND EXTRACT(YEAR FROM transactions.transaction_date) = $2 AND account_id = $3"
+    values = [Date.today.month, Date.today.year, @id]
     total_spent = SqlRunner.run(sql, values)[0].values().first()
-    return total_spent
+    return total_spent || 0
   end
 
   def User.find(id)
@@ -113,10 +106,9 @@ class User
     SqlRunner.run(sql)
   end
 
-  def User.login_find(username, password)
+  def User.login(username, password)
     sql = "SELECT * FROM users WHERE name=$1 AND password = $2;"
     user = SqlRunner.run_sql_and_map(sql, User, [username, password])
-
     return user[0]
   end
 
