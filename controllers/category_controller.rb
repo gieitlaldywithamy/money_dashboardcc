@@ -4,7 +4,6 @@ require 'sinatra'
 
 require_relative('../models/transaction.rb')
 require_relative('../models/category.rb')
-require_relative('../models/merchant.rb')
 
 get('/categories') do
   @categories = Category.all()

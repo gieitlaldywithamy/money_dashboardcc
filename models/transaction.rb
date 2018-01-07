@@ -1,6 +1,5 @@
 require('./db/sql_runner')
 #require('pry-byebug')
-require_relative('./merchant.rb')
 require_relative('./category.rb')
 
 class Transaction

@@ -8,7 +8,6 @@ require_relative('./controllers/user_controller.rb')
 
 require_relative('./models/transaction.rb')
 require_relative('./models/category.rb')
-require_relative('./models/merchant.rb')
 require_relative('./models/user.rb')
 
 get '/' do
