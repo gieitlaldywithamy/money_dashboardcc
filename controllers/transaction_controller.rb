@@ -12,7 +12,7 @@ post('/transactions/month_total') do
   @account_id = session[:id]
   @user = User.find(@account_id)
   @monthly_spend = Transaction.sum_by_month_for_user(@month, @account_id)
-  @monthly_transactions = Transaction.transaction_by_month(@month)
+  @monthly_transactions = Transaction.transaction_by_month(@month, @account_id)
   @transactions = @user.transactions()
   @show_month = true
   @name = @user.name
