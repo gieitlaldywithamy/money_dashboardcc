@@ -21,7 +21,7 @@ post('/registrations') do
   @user = User.new(params)
   @user.save()
   session[:id] = @user.id
-  redirect to "/users"
+  redirect to "/dashboard"
 end
 
 get('/dashboard') do
@@ -54,7 +54,7 @@ post('/users') do
       @user.save()
       session[:id] = @user.id
       p "saved new user"
-      redirect to "/users"
+      redirect to "/dashboard"
     end
 
 

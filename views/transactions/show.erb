@@ -1,7 +1,6 @@
 
 
-<a href="/transactions/<%= @transaction.id %>/edit" style="
-text-decoration: none">Edit</a>
+<a href="/transactions/<%=@transaction.id%>/edit" style="text-decoration: none">Edit</a>
 
 
 <p><%= @transaction.name %>
@@ -11,6 +10,6 @@ text-decoration: none">Edit</a>
 <%= @transaction.category.name %>
 </p>
 
-<form method="post" action="/transactions/<%= @transaction.id %>/delete">
+<form method="post" action="/transactions/<%=@transaction.id%>/delete">
   <input type="submit" value="Delete"/>
 </form>
