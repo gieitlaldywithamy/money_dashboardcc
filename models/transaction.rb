@@ -73,7 +73,7 @@ class Transaction
   end
 
   def Transaction.transaction_by_month(month, user_id)
-    sql = "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = @2"
+    sql = "SELECT * FROM transactions WHERE EXTRACT(MONTH FROM transactions.transaction_date) = $1 AND account_id = $2"
     values = [month, user_id]
     return SqlRunner.run_sql_and_map(sql, Transaction, values)
   end
